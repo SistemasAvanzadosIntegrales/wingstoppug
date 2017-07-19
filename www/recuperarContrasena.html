@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title> </title>
+
+<!-- Bootstrap -->
+<link href="css/bootstrap.css" rel="stylesheet">
+
+<!--CSS-->
+<link rel="stylesheet" href="css/main.css" />
+<link rel="stylesheet" href="css/font-awesome.css">
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+<script src="cordova.js"></script>          <!-- phantom library, needed for Cordova api calls, added during build -->
+<script src="js/app.js"></script>           <!-- recommended location of your JavaScript code relative to other JS files -->
+<script src="xdk/init-dev.js"></script>     <!-- normalizes device and document ready events, see README for details -->
+<script src="js/localstorage.js"></script>
+
+</head>
+<body>
+<div class="col-md-12 nav-sup text-center bg-gris text-blanco">
+	<div class="logo pull-left valing-baseline inline"><img src="img/imgLogo.png"></div>
+	<h1 class="titulo text-center inline valing-baseline text-blanco"></h1>
+	<div class="btn-regresar pull-right inline valing-baseline"><a href="index.html" ><span class="fa fa-arrow-circle-o-left"></span></a></div>
+</div>  
+
+
+<div class="row col-md-12 container" id="main">
+    <center><h3 class="text-blanco"><b>Recuperar Contraseña</b></h3></center><br>
+    <div><p class="text-center"></p>
+  			<form  class="form-group text-right">
+                <center>
+                    <label style="color:#ffffff"><img style="max-width:250px" src="img/logo_blanco.png" /> <br><br>Escriba los datos solicitados y <br>presione el boton "Recuperar contraseña"<br></label>
+                </center><br/>
+    			<!--<input type="text" class="form-control" id="numero_tarjeta"  name="numero_tarjeta" placeholder="Número de tarjeta">-->
+                <input type="text" class="form-control" id="email"  name="email" placeholder="E-mail">
+                <p class="alert alert-danger" id="alertaLogin" style="display:none !important;"></p>
+                <button type="button" onclick="recuperarContrasena();" class="btn-gris text-right"><span class="fa fa-reply"> </span> Recuperar contraseña</button>
+			</form>
+    <div id="menus"></div>
+      </div>
+	</div>  
+ 
+<!--JS-->
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.min.js"></script>
+<script src="js/prefixfree.min.js"></script>
+<script src="js/localstorage.js"></script>
+<script src="js/comun.js"></script>
+</body>
+</html>

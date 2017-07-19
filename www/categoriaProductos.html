@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <!--CSS-->
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="css/menu.css" />
+    <link rel="stylesheet" href="css/modal.css" />
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="cordova.js"></script>          <!-- phantom library, needed for Cordova api calls, added during build -->
+    <script src="js/app.js"></script>           <!-- recommended location of your JavaScript code relative to other JS files -->
+    <script src="xdk/init-dev.js"></script>
+    <script src="js/qr.js"></script> 
+    <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="js/jquery.browser.js"></script>
+    <script type="text/javascript" src="js/snog-2.5.27.js"></script>
+    <script type="text/javascript" src="js/snog-2.5.27-widget.js"></script>
+    <script type="text/javascript" src="js/snog-config.js"></script>
+    <script type="text/javascript" src="js/picnicLogin.js"></script>
+</head>
+<body onclick="afuera();">
+
+    <header id="menu_generico"></header>
+    
+       <seccion class="pull-right">
+		<aside  class="pull-right">
+			<ul>
+                <li class="gris pedidos"><a class="logo2" href="pedido.html"><span  class="fa fa-eye"></span>Mis pedidos<span class="fa fa-chevron-right pull-right"></span></a></li>
+				<li class="gris pedidos"><a class="logo2" href="pedido_producto.html"><span class="fa fa-shopping-cart"></span>Mi carrito<span class="fa fa-chevron-right pull-right"></span></a></li>
+                <li class="gris pedidos"><a class="logo2" onclick="met_pago()"><span class="fa fa-dollar"></span>Formas de pago<span class="fa fa-chevron-right pull-right"></span></a></li>
+                <li class="gris pedidos"><a class="logo2" href="pedido_domicilio.html"><span  class="fa fa-list"></span>Menú<span class="fa fa-chevron-right pull-right"></span></a></li>
+			</ul>
+		</aside>
+	</seccion>
+<div class="col-md-12 nav-sup text-center bg-gris text-blanco">
+	<div class="logo pull-left valing-baseline inline"><img src="img/imgLogo.png"></div>
+	<h1 class="titulo text-center inline valing-baseline text-blanco"><span class="fa fa-user"></span> Inicio</h1>
+    <div class="btn-regresar pull-right inline valing-baseline"><!--<a><span class="fa fa-bars mn"></span></a>--><a href="todasLasPromociones.html"><span class="fa fa-arrow-circle-o-left"></span></a></div>
+</div> 
+    
+    <div class="row col-md-12 container" id="main">
+    <div id="sesionUsuario" class="margin-no-espacios hidden">
+        <div class="width50 floatLeft nombreUsuario">Bienvenido(a)</div>
+        <div class="width50 floatLeft text-right puntosUsuario">Tienes 640 pts</div>
+    </div>
+    <div class="text-center">
+         <ul class="margin-no-espacios text-blanco padding-0" style="height:50px">
+            <li class="btn-azul  inline width50 valing-middle active sinBordeRedondeado floatLeft sinMargin"><a href="categoriaProductos.html" class="">Todas las Promociones</a></li>
+            <!--<li class="inline separacion-vertical"><img src="img/imgVacio.png"/></li>-->
+            <li class=" btn-azul  inline width50 valing-middle inactive sinBordeRedondeado floatLeft sinMargin"><a href="verPromocionesPrue.html" class="">Promociones cerca de mi</a></li>
+        </ul>
+        <!--<ul class="bg-azul margin-no-espacios text-blanco text-center padding-0">
+            <li class="text-blanco inline width30 valing-middle"><a href="categoriaProductos.html" >Todas las Promociones</a></li>
+            <li class="inline separacion-vertical"><img src="img/imgVacio.png"/></li>
+            <li class="text-blanco inline width30 valing-middle"><a href="verPromocionesPrue.html">Promociones cerca de mi</a></li>
+        </ul>-->
+        <div class="text-center col-md-12 container" id="contenedorPromociones">
+            <center><label class="text-azul" style="font-size:22px;" id="no_cat"></label></center>
+        </div>
+    </div>
+</div>
+    <label id="msg"></label>
+    <center><div id="cup"></div></center>
+     <div id="fade" class="overlay" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'"></div>
+<!-- fin base semi-transparente -->
+ 
+    
+<!-- ventana modal -->  
+	<div id="light" class="modal text-center">
+        <div id="cerrarModal" onclick="cerrar_modal();">
+            <i class="fa fa-times fa-3x"></i>
+        </div>
+    	<p>¿Desea canjear esta promoción?<br>
+            <button onclick="cerrar_modal();" type="button" class="btn-gris text-right"><span class="fa fa-arrow-circle-left"> </span> Regresar</button>
+            <button onclick="modal2();" type="button" class="btn-gris text-right"><span class="fa fa-check-circle"> </span> Aceptar</button>  
+        </p>
+    </div>
+<!-- fin ventana modal -->
+    
+    <div id="fade2" class="overlay" onclick = "document.getElementById('light2').style.display='none';document.getElementById('fade').style.display='none'"></div>
+<!-- fin base semi-transparente -->
+ 
+<!-- ventana modal -->  
+	<div id="light2" class="modal2 text-center">
+        <div id="cerrarModal" onclick="cerrar_modal();">
+            <i class="fa fa-times fa-3x"></i>
+        </div>
+    	<h2 class="text-azul bullet">¡Operación exitosa!</h2>
+        <p class="sinMargin">
+            Canjea este cupón presentándolo en cualquiera de nuestras sucursales de <label class="text-azul"><b>WING-STOP</b></label>
+        </p>
+        <div id="qr"></div>
+        <form>
+            <label>
+                <label id="msg2" class="text-azul"></label>
+            </label>
+        </form>
+        
+        <a>
+            <button type="" onclick="aceptar();" class="btn-gris text-left">
+                <span class="fa fa-check-circle"> </span> Aceptar
+            </button>
+        </a>
+    </div>
+<!-- fin ventana modal fa fa-arrow-circle-left -->
+    <br><br><br>
+<div class="nav-inf bg-negro text-blanco" id="menus">
+    <!--<div class="btn-regresar pull-left inline valing-baseline mn2"><a href="#"><span class="fa fa-shopping-cart"></span></a></div>-->
+	<div class="btn-regresar pull-right valing-baseline inline mn"><a href="#"><span class="fa fa-bars"></span></a></div>
+
+</div> 
+ 
+  <!--JS-->
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/prefixfree.min.js"></script>
+  <script src="js/menu.js"></script>
+  <script src="js/localstorage.js"></script>
+  <script src="js/comun.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/menu_generico.js"></script>
+  <script src="js/facebook.js"></script>
+  <script src="js/qrcode.js"></script>    
+  <script>
+          extraerPromociones(0);
+          $(document).ready(function()
+          {
+              document.addEventListener("deviceready", onDeviceReady, false);
+
+                // Cordova is ready
+                function onDeviceReady() {
+                    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onFileSystemSuccess, onFileSystemFail);
+                }
+
+                function onFileSystemSuccess(fileSystem) {
+                    console.log(fileSystem.name);
+                    var directoryEntry = fileSystem.root;
+                    directoryEntry.getDirectory("Pictures", {create: true, exclusive: false}, onDirectorySuccess, onDirectoryFail)
+                }
+
+                function onDirectorySuccess(parent) {
+
+                   // alert("Carpeta Creada");
+                }
+
+                function onDirectoryFail(error) {
+                   // alert(JSON.stringify(error));
+                }
+
+                function onFileSystemFail(evt) {
+                   // alert(evt.target.error.code);
+                } 
+              loginRealm();   
+              //alert(localStorage.getItem('u_cupon'));
+               if(localStorage.getItem('u_cupon'))
+               {
+                  document.getElementById("menus").style.display="block";
+                  $('#cup').append('<img onclick="modal2();" src="img/imgQRCode.jpg"><br/><br/><p class="text-azul">Tu código es: <label class="text-azul msg3"></label></p></div>');
+                  $('.msg3').html(localStorage.getItem("u_cupon"));
+                  $('#msg2').html(localStorage.getItem("u_cupon"));
+              //update_qrcode2('msg3'); 
+                }
+          });
+             function modal(a){
+              //alert(a);
+              localStorage['cupon_tem2'] = a;
+              document.getElementById('light').style.display='block';
+              document.getElementById('fade').style.display='block';
+              $('.msg3').html(localStorage.getItem("cupon_tem2"));
+              //$('#msg2').html(localStorage.getItem("cupon_tem2"));
+          }
+           function cerrar_modal(){
+              document.getElementById('light').style.display='none';
+              document.getElementById('fade').style.display='none';
+              document.getElementById('light2').style.display='none';
+              document.getElementById('fade2').style.display='none';
+          }
+          function modal2(){
+              document.getElementById('light').style.display='none';
+              document.getElementById('fade').style.display='none';
+              document.getElementById('light2').style.display='block';
+              document.getElementById('fade2').style.display='block';
+              update_qrcode2('msg2');
+          }
+          function aceptar(){
+              //document.getElementById("cup").style.display="block";
+              //document.getElementById("cup").innerHTML="";
+              //$('#cup').append('<img onclick="modal2();" src="img/imgQRCode.jpg"><br/><br/><p class="text-azul">Tu código es: <label class="text-azul msg3"></label></p></div>');
+              //localStorage.setItem('u_cupon',localStorage['cupon_tem2']);
+              //$('#msg2').html(localStorage.getItem("u_cupon"));
+              //$('.msg3').html(localStorage.getItem("u_cupon"));
+              //update_qrcode2('msg2');
+              cerrar_modal();
+          }
+  </script>
+</body>
+</html>

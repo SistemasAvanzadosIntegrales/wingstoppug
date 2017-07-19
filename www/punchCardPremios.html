@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<title></title>
+
+<!-- Bootstrap -->
+<link href="css/bootstrap.css" rel="stylesheet">
+
+<!--CSS-->
+<link rel="stylesheet" href="css/main.css" />
+<link rel="stylesheet" href="css/font-awesome.css">
+<link rel="stylesheet" href="css/menu.css" />
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+  <script src="cordova.js"></script>          <!-- phantom library, needed for Cordova api calls, added during build -->
+    <script src="js/app.js"></script>           <!-- recommended location of your JavaScript code relative to other JS files -->
+    <script src="xdk/init-dev.js"></script>     <!-- normalizes device and document ready events, see README for details -->
+
+
+
+    <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="js/jquery.browser.js"></script>
+    <script type="text/javascript" src="js/snog-2.5.27.js"></script>
+    <script type="text/javascript" src="js/snog-2.5.27-widget.js"></script>
+    <script type="text/javascript" src="js/snog-config.js"></script>
+
+    
+    </head>
+ <body onclick="afuera();" onload="getBoardInstances();">
+
+     <header id="menu_generico">
+        
+      </header>
+    
+       <seccion class="pull-right">
+		<aside  class="pull-right">
+			<ul>
+                <li class="gris pedidos"><a class="logo2" href="pedido.html"><span  class="fa fa-eye"></span>Mis pedidos<span class="fa fa-chevron-right pull-right"></span></a></li>
+				<li class="gris pedidos"><a class="logo2" href="pedido_producto.html"><span class="fa fa-shopping-cart"></span>Mi carrito<span class="fa fa-chevron-right pull-right"></span></a></li>
+                <li class="gris pedidos"><a class="logo2" onclick="met_pago();"><span class="fa fa-dollar"></span>Formas de pago<span class="fa fa-chevron-right pull-right"></span></a></li>
+                <li class="gris pedidos"><a class="logo2" href="pedido_domicilio.html"><span  class="fa fa-list"></span>Menú<span class="fa fa-chevron-right pull-right"></span></a></li>
+			</ul>
+            <div class="text-center">
+	          <center><a onclick="salir();"><button class="btn btn-gris"><span class="fa fa-sign-out"></span> Sali de la aplicación</button></a></center> </div>
+		</aside>
+	</seccion>
+<div class="col-md-12 nav-sup text-center bg-gris text-blanco">
+  <div class="logo pull-left valing-baseline inline"><img src="img/imgLogo.png"></div>
+  <h1 class="titulo text-center inline valing-baseline text-blanco"><span class="fa fa-gift"></span> Mis premios</h1>
+  <div class="btn-regresar pull-right inline valing-baseline"><a href="premios.html"><span class="fa fa-arrow-circle-o-left"></span></a></div>
+</div>
+<div class="row col-md-12 container" id="main">
+<ul class="bg-azul margin-no-espacios text-blanco text-center padding-0">
+           <li class="text-blanco inline width30 valing-middle active"><a href="premios.html">Mis Punch Cards</a></li>
+        <li class="inline separacion-vertical"><img src="img/imgVacio.png"/></li>
+        <li class="text-blanco inline width30 valing-middle"><a href="punchCardPremios.html">Punch Cards disponibles</a></li>
+      </ul>
+            <button id="get" class="btn btn-info btnHidden" onclick="getBoardInstances();" type="button" style="display:none">Get board instances</button>
+        <button id="llenar" class="btn btn-warning btnHidden" onclick="getBagInstance(17);" type="button" style="display:none">Get bag instance</button>
+  <div id="boardinstances">
+      <br>
+       <!--   <div class="ventana margin-centro">
+            <div class="premios-header">
+                <p class=" text-right text-azul inline pull-right">0/6</p>
+                <img class="inline pull-left" src="img/chekOnPremio01.png" class="img-icono">
+            </div>
+            <h2 class="text-azul bullet"> Premio sorpresa</h2>
+            <p>Obten 6 artículos para obtener este premio</p>
+            <form id="checkCirculo">
+              <input type="checkbox" id="a1" name="a1">
+              <label for="a1"><span></span></label>
+              <input type="checkbox" id="a2" name="a2">
+              <label for="a2"><span></span></label>
+              <input type="checkbox" id="a3" name="a3">
+              <label for="a3"><span></span></label>
+              <input type="checkbox" id="a4" name="a4">
+              <label for="a4"><span></span></label>
+              <input type="checkbox" id="a5" name="a5">
+              <label for="a5"><span></span></label>
+              <input type="checkbox" id="a6" name="a6">
+              <label for="a6"><span></span></label>
+            </form>
+          </div> -->
+
+    </div>
+</div>
+    <br><br>
+<div class="nav-inf bg-negro text-blanco" id="menus">
+	<div class="btn-regresar pull-left inline valing-baseline mn2"><a href="#"><span class="fa  fa-shopping-cart"></span></a></div>
+	<div class="btn-regresar pull-right inline valing-baseline mn"><a href="#"><span class="fa fa-bars"></span></a></div>
+</div> 
+
+<!--JS--> 
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.min.js"></script>
+<script src="js/prefixfree.min.js"></script>
+    <script src="js/localstorage.js"></script>
+   <script src="js/comun.js"></script>  
+     <script src="js/menu_generico.js"></script>
+<script src="js/facebook.js"></script>
+    <script src="js/menu.js"></script>
+    <script src="js/main.js"></script>
+     <script type="text/javascript">
+    $(document).ready(function(){
+         if(pughpharm.isLogged()){
+                 loginRealm();
+              
+            } else{
+                window.location = "index.html"
+            }
+       
+    });
+    </script>
+    <script type="text/javascript">
+    function loginRealm()
+    {
+        snog_dispatcher.broadcast(Snog.events.REALM_LOGIN, {token: "cb6e21d4f679edf058be50c19ba3f340", realm:"easier_loyalty"});
+    }
+
+    function getItemsFromBatch()
+    {
+        snog_dispatcher.broadcast(Snog.events.GET_ITEM_BATCH, {size:500, ttl:1500});
+    }
+
+    function getItemsPlayerInventory()
+    {
+        snog_dispatcher.broadcast(Snog.events.GET_PLAYER_INVENTORY);
+    }
+
+    function getBoardInstances()
+    {
+        snog_dispatcher.broadcast(Snog.events.GET_BOARDS_INSTANCES, {type:'special', player_id:3 });
+    }
+
+    function dropFromInventory(slot)
+    {
+        snog_dispatcher.broadcast(Snog.events.DROP_INVENTORY_ITEM, { slot_id:slot });
+    }
+
+    function takeItemFromBatch(item, batch)
+    {
+        snog_dispatcher.broadcast(Snog.events.TAKE_ITEM_FROM_BATCH, {batch_uuid:batch, item_instance_uuid:item});
+    }
+
+    function unlockBoard(board)
+    {
+        snog_dispatcher.broadcast(Snog.events.UNLOCK_BOARD_INSTANCE, { board_instance_id:board });
+    }
+
+    function swapItem(f_bag_id, f_slot_id,f_item_instance_uuid,t_bag_id,t_slot_id,t_item_instance_uuid)
+    {
+        snog_dispatcher.broadcast(Snog.events.SWAP_ITEM_INSTANCES, { from_bag_id:f_bag_id, from_slot_id:f_slot_id, from_item_instance_uuid:f_item_instance_uuid, to_bag_id:t_bag_id, to_slot_id:t_slot_id, to_item_instance_uuid:t_item_instance_uuid});
+    }
+
+    function getBagInstance(board)
+    {
+        snog_dispatcher.broadcast(Snog.events.LOAD_BOARD_INSTANCE_BAG, { board_instance_id:board });
+    }
+
+    function lockBoard(board)
+    {
+        snog_dispatcher.broadcast(Snog.events.LOCK_BOARD_INSTANCE, { board_instance_id:parseInt(board) });
+    }
+
+    function getReward()
+    {
+        snog_dispatcher.broadcast(Snog.events.GET_REWARD_INSTANCES,{player_id:3});
+
+    }
+
+    $(document).ready(function(){
+        bag=null;
+        boardInstance=null;
+        // Initialize Snog engine;
+        Snog.all();
+        Snog.debug = false;
+
+        snog_data = Snog.require('data');
+        snog_dispatcher = Snog.require('dispatcher');
+        new_batch_flag=true;
+
+
+
+        snog_dispatcher.on(Snog.events.LOGIN_SUCCESS, function (data) 
+        {
+            $(".btnHidden").show();
+            snog_dispatcher.broadcast(Snog.events.GET_REWARD_INSTANCES, { player_id:"3" });
+        });
+
+        snog_dispatcher.on(Snog.events.GET_ITEM_BATCH_SUCCESS, function(data)
+        {
+            jQuery.each(data.item_instances, function(i, val) 
+            {
+                
+                $( '<b>'+i+'</b><img title="'+val.item_ref+'" width="100" src="'+val.assets[0].uri+'" /><input type="button" value="Take" onclick="takeItemFromBatch(\''+val.item_instance_uuid+'\',\''+data.batch_uuid+'\');"/>' ).appendTo( "#batch" );
+
+            });
+        });
+
+        snog_dispatcher.on(Snog.events. GET_ITEM_BATCH_ERROR, function(data){
+            console.log("error getting batch");
+            $("#batch").html('<p class="alert alert-danger">Error getting batch</p>');
+        });
+
+        snog_dispatcher.on(Snog.events.GET_PLAYER_INVENTORY_SUCCESS, function () 
+        {
+            
+            console.log(snog_data.player_inventory);
+
+            $("#inventory").html('');
+
+            jQuery.each(snog_data.player_inventory.slots, function(i, val) 
+            {
+                /*if(val.item_instance.metadata=='')
+                {
+
+                }
+                else
+                {
+                    $( '<b>'+i+'</b><img width="100" src="'+val.item_instance.assets[0].uri+'" />' ).appendTo( "#inventory" );
+                }*/
+                //console.log(val);
+                
+                if(val.item_instance!=null)
+                    $( '<b>'+i+'</b><img width="100" title="'+val.item_instance.item_ref+'" src="'+val.item_instance.assets[0].uri+'" /><input type="button" onclick="dropFromInventory('+val.slot_id+');" value="Drop"><input type="button" onclick="swapItem('+snog_data.player_inventory.bag_id+','+val.slot_id+', \''+val.item_instance.item_instance_uuid+'\',23,5,'+null+');" value="Swap">' ).appendTo( "#inventory" );
+                
+
+                
+            });
+        });
+
+        snog_dispatcher.on(Snog.events.GET_BOARDS_INSTANCES_SUCCESS, function (data) 
+        {
+            console.log(data);
+            jQuery.each(data, function(i, val) 
+            {
+                //console.log(val.empty);
+                if(val.empty===false)
+                {
+                    //console.log(val);
+                    var tds="<tr>";
+                    var j=0;
+
+                    for(j=0; j<val.board_instance.size;j++)
+                        tds+='<td id="slot'+j+'"><img width="60" src="'+val.board_instance.assets[1].uri+'" /></td>';
+
+                    tds+="</tr>";
+                 
+                    $('<table><tr><td colspan="'+val.board_instance.size+'"><img title="Board instance: '+val.board_instance.board_instance_id+'" width="300" src="'+val.board_instance.assets[0].uri+'" /><input type="button" value="Unlock" onclick="unlockBoard(\''+val.board_instance.board_instance_id+'\');"><input type="button" value="Lock" onclick="lockBoard(\''+val.board_instance.board_instance_id+'\');"></td></tr>'+tds+'</table>').appendTo('#boardinstances');
+               
+                }
+
+            });
+        });
+
+
+        snog_dispatcher.on(Snog.events.DROP_INVENTORY_ITEM_SUCCESS, function (data) 
+        {
+            console.log("Dropped:"+data);
+
+        });
+
+
+        snog_dispatcher.on(Snog.events.TAKE_ITEM_FROM_BATCH_SUCCES, function (data) 
+        {
+                console.log("Success taking item from batch - " + data);
+                getItemsPlayerInventory();
+        });
+
+        snog_dispatcher.on(Snog.events.UNLOCK_BOARD_INSTANCE_SUCCESS, function (data) 
+        {
+                console.log("Unlock success" + data);
+        });
+
+        snog_dispatcher.on(Snog.events.LOCK_BOARD_INSTANCE_SUCCESS, function (data) 
+        {
+                console.log("lock success");
+                console.log(data);
+                $("#btnReward").show();
+        });
+
+        snog_dispatcher.on(Snog.events.LOAD_BOARD_INSTANCE_BAG_SUCCESS, function (data) 
+        {
+            jQuery.each(data.bag_items, function(i, val) 
+            {
+                $("#slot"+val.slot_id).html('<img src="'+val.item_instance.assets[0].uri+'" width="60"/>');
+            });
+            
+            
+        });
+
+        snog_dispatcher.on(Snog.events.GET_REWARD_INSTANCES_SUCCESS, function (data) 
+        {
+                console.log("rewards success");
+                console.log(data);
+        });
+
+    });
+
+    </script>
+</body>
+</html>
+  
+    

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title></title>
+
+<!-- Bootstrap -->
+<link href="css/bootstrap.css" rel="stylesheet">
+
+<!--CSS-->
+<link rel="stylesheet" href="css/main.css" />
+<link rel="stylesheet" href="css/font-awesome.css">
+<link rel="stylesheet" href="css/menu.css" />
+<link rel="stylesheet" href="css/modal.css">
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body onclick="afuera();">
+       <header id="menu_generico">
+        
+      </header>
+    
+       <seccion class="pull-right">
+		<aside  class="pull-right">
+			<ul>
+                <li class="gris pedidos"><a class="logo2" href="pedido.html"><span style="margin-left:70px;"><span class="fa fa-eye"></span>Mis pedidos</span><span class="fa fa-chevron-right pull-right"></span></a></li>
+				<li class="gris pedidos"><a class="logo2" href="pedido_producto.html"><span class="fa fa-shopping-cart"></span>Mi carrito<span class="fa fa-chevron-right pull-right"></span></a></li>
+                <li class="gris pedidos"><a class="logo2" onclick="met_pago()"><span class="fa fa-dollar"></span>Formas de pago<span class="fa fa-chevron-right pull-right"></span></a></li>
+                <li class="gris pedidos"><a class="logo2" href="pedido_domicilio.html"><span  class="fa fa-list"></span>Menú<span class="fa fa-chevron-right pull-right"></span></a></li>
+			</ul>
+		</aside>
+	</seccion>
+<div class="col-md-12 nav-sup text-center bg-gris text-blanco">
+	<div class="logo pull-left valing-baseline inline"><img src="img/imgLogo.png"></div>
+    <h1 class="titulo text-center inline valing-baseline text-blanco" ><!--<span class="fa fa-gift"></span>--><span style='margin-left:70px;'>Mis Premios</span></h1>
+	<div class="btn-regresar pull-right inline valing-baseline"><a href="todasLasPromociones.html"><span class="fa fa-arrow-circle-o-left"></span></a></div>
+</div>  
+
+
+<div class="row col-md-12 container" id="main">
+    <div style="margin-top:8%;"></div>
+<div class="text-center">
+	<a href="misPunchcards.html">
+        <div class="pounchCardButton">
+            <img src="img/punchcard_seccion.jpg" />
+            <div class="btn-azul inline sinBordeRedondeado pounchCardTitleBar">
+                <span class="fa fa-tags"></span> Punch Cards
+            </div>
+            <div class="pounchCardTitle"><strong>Punch Cards</strong></div>
+            <div class="pounchCardDescripcion">Acumula compras y automáticamente gana recompensas.</div>
+            <!--<div class="pounchCardVerMas btn-azul inline width30">Ver más</div>-->
+            <div class="cuponesVerMas"><img src="img/btn_vermas.png" height="40"></div>
+        </div>
+    </a>
+    &nbsp;
+    <a href="misCupones.html">
+        <div class="cuponesButton">
+            <img src="img/cupon_seccion.jpg" />
+            <div class="btn-azul inline sinBordeRedondeado cuponesTitleBar">
+                <span class="fa fa-ticket"></span> Cupones
+            </div>
+            <div class="cuponesTitle"><strong>Cupones</strong></div>
+            <div class="cuponesDescripcion">Conoce tus cupones personalizados <br/> que puedes cambiar en cualquier sucursal.</div>
+            <!--<div class="cuponesVerMas btn-azul inline width30">Ver más</div>-->
+            <div class="cuponesVerMas"><img src="img/btn_vermas.png" height="40"></div>
+        </div>
+    </a>
+
+
+</div>
+</div>
+    
+<div class="nav-inf bg-negro text-blanco" id="menus">
+	<div class="btn-regresar pull-right inline valing-baseline mn"><a href="#"><span class="fa fa-bars"></span></a></div>
+</div> 
+
+
+
+    <!--JS--> 
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+    <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script> 
+    <!-- Include all compiled plugins (below), or include individual files as needed --> 
+    <script src="js/bootstrap.min.js"></script> 
+    <script src="js/prefixfree.min.js"></script>
+    <script src="js/menu.js"></script>
+    <script src="js/localstorage.js"></script>
+    <script src="js/comun.js"></script>
+    <!--<script src="js/verPromociones.js"></script>-->
+    <script src="js/menu_generico.js"></script>
+    <script src="js/facebook.js"></script>
+    <script src="js/main.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function()
+        {
+            if(pughpharm.isLogged())
+            {
+                /picnicPendientes();
+            } 
+            else
+            {
+                window.location = "index.html"
+            }
+        });
+        function modal(a){
+            //alert(a);
+            localStorage['cupon_tem'] = a;
+            document.getElementById('light').style.display='block';
+            document.getElementById('fade').style.display='block';
+            $('.msg3').html(localStorage.getItem("cupon_tem"));
+            $('#msg2').html(localStorage.getItem("cupon_tem"));
+        }
+        function cerrar_modal(){
+            document.getElementById('light').style.display='none';
+            document.getElementById('fade').style.display='none';
+            document.getElementById('light2').style.display='none';
+            document.getElementById('fade2').style.display='none';
+        }
+        function modal2(){
+            document.getElementById('light').style.display='none';
+            document.getElementById('fade').style.display='none';
+            document.getElementById('light2').style.display='block';
+            document.getElementById('fade2').style.display='block';
+            update_qrcode2('msg2');
+        }
+        function aceptar(){
+            //document.getElementById("menus").style.display="block";
+            // document.getElementById("menus").innerHTML="";
+            //$('#menus').append('<img onclick="modal2();" src="img/imgQRCode.jpg"><br/><br/><p class="text-azul">Tu código es: <label class="text-azul msg3"></label></p></div>');
+            //localStorage.setItem('uso_cupon',localStorage['cupon_tem']);
+            //$('#msg2').html(localStorage.getItem("uso_cupon"));
+            //$('.msg3').html(localStorage.getItem("uso_cupon"));
+            //update_qrcode2('msg2');
+            cerrar_modal();
+        }
+        $(document).ready(function(){
+            //id='btnRegreso' href="categoriaProductos.html"
+            if(pughpharm.isLogged()){
+                $("#btnRegreso").attr('href','misPremios.html');
+                $("#btnRegistrate").css("display","none");
+            }else{
+                $("#btnRegreso").attr('href','index.html');
+                $("#btnRegistrate").css("display","");
+            }//if
+
+            if(localStorage.getItem('uso_cupon')){
+                document.getElementById("menus").style.display="block";
+             $('#menus').append('<img onclick="modal2();" src="img/imgQRCode.jpg"><br/><br/><p class="text-azul">Tu código es: <label class="text-azul msg3"></label></p></div>');
+                 $('.msg3').html(localStorage.getItem("uso_cupon"));
+                $('#msg2').html(localStorage.getItem("uso_cupon"));
+            }//if
+            //if(pughpharm.isLogged()){
+            //}else{
+            //    window.location="index.html"
+            //}//if
+        });
+    </script> 
+</body>
+</html>

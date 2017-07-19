@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> </title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <!--CSS-->
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/redmond/jquery-ui.min.css">
+    
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="cordova.js"></script>          <!-- phantom library, needed for Cordova api calls, added during build -->
+    <script src="js/app.js"></script>           <!-- recommended location of your JavaScript code relative to other JS files -->
+    <script src="xdk/init-dev.js"></script>     <!-- normalizes device and document ready events, see README for details -->
+    <script src="js/localstorage.js"></script>    
+
+</head>
+<body>
+    <div class="col-md-12 nav-sup text-center bg-gris text-blanco">
+        <div class="logo pull-left valing-baseline inline"><img src="img/imgLogo.png"></div>
+        <h1 class="titulo text-center inline valing-baseline text-blanco"><!--<span class="fa fa-user"></span>-->Soy un usuario de Leatad</h1>
+        <div class="btn-regresar pull-right inline valing-baseline"><a href="index.html"><span class="fa fa-arrow-circle-o-left"></span></a></div>
+    </div>  
+
+
+    <div class="row col-md-12 container" id="main">
+        <div>
+            <form  class="form-group text-right" name="frmRegistro" id="frmRegistro">
+                <center><label>Para tramitar tu tarjeta NOMBRE DE LA EMPRESA es nesesario completar este registro</label></center>
+                <!--<input type="text" class="form-control" id="nombre"  name="nombre" placeholder="Nombre">-->
+                <input type="text" class="form-control" id="numero_tarjeta"  name="numero_tarjeta" placeholder="Número de tarjeta">
+                <!--<select class="form-control" id="sexo"  name="sexo">
+                    <option value="0">Elija una opción</option>
+                    <option value="1">Femenino</option>
+                    <option value="2">Masculino</option>
+                </select>-->
+                <input type="text" class="form-control" id="email"  name="email" placeholder="E-mail">
+                <input type="text" class="form-control" id="telefono"  name="telefono" placeholder="Teléfono">
+                <select class="form-control" onchange="cargaMunicipios();" id="idEstado"  name="idEstado">
+                    <option value="0">Elija una opción</option>
+                </select>
+                <select class="form-control" id="idMunicipio"  name="idMunicipio">
+                    <option value="0">Elija una opción</option>
+                </select>
+                <input type="text" class="form-control" id="colonia"  name="colonia" placeholder="Colonia">
+                <input type="text" maxlength="5" class="form-control" id="cp"  name="cp" placeholder="Cp">
+                
+                <!--<input type="text" class="form-control" id="fecha_nac"  name="fecha_nac" placeholder="Fecha de nacimiento">-->
+                <input type="hidden" value="1" name="estaDeacuerdo" id="estaDeacuerdo" />
+                <p class="alert alert-danger" id="alertaRegistro" style="display:none !important;"></p>
+                <button onclick="registrar();" type="button" class="btn-gris text-right"><span class="fa fa-mail-forward"> </span> Enviar</button>
+                 <button onclick="cqr();" type="button" class="btn-gris text-right"><span class="fa fa-mail-forward"> </span> Codigo QR</button>
+                
+            </form>
+          </div>
+
+        <!--<div class="btn-azul margin-centro"><a href="recuperarContrasena.html" class="text-blanco"><span class="fa fa-user"></span> Recuperar contraseña</a></div>-->
+    </div>  
+
+    <!--JS-->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/prefixfree.min.js"></script>
+    <script src="js/localstorage.js"></script>
+    <script src="js/comun.js"></script>
+    <script src="js/registro.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#fecha_nac").datepicker();
+        });
+        function cqr(){
+            window.location = "floatCupon02.html";
+        }
+    </script>
+</body>
+</html>

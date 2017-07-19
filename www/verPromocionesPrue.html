@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title></title>
+
+<!-- Bootstrap -->
+<link href="css/bootstrap.css" rel="stylesheet">
+
+<!--CSS-->
+<link rel="stylesheet" href="css/main.css" />
+<link rel="stylesheet" href="css/font-awesome.css">
+<link rel="stylesheet" href="css/menu.css" />
+<link rel="stylesheet" href="css/modal.css">
+ <script src="intelxdk.js"></script>         
+    <script src="cordova.js"></script>          
+    <script src="xhr.js"></script>              
+
+    <script src="js/app.js"></script>
+    <script src="js/init-app.js"></script>
+    <script src="js/init-dev.js"></script>
+    <script src="js/qrcode.js"></script>
+</head>
+<body onclick="afuera();">
+
+      <header id="menu_generico">
+        
+      </header>
+    
+       <seccion class="pull-right">
+		<aside  class="pull-right">
+			<ul>
+                <li class="gris pedidos"><a class="logo2" href="pedido.html"><span  class="fa fa-eye"></span>Mis pedidos<span class="fa fa-chevron-right pull-right"></span></a></li>
+				<li class="gris pedidos"><a class="logo2" href="pedido_producto.html"><span class="fa fa-shopping-cart"></span>Mi carrito<span class="fa fa-chevron-right pull-right"></span></a></li>
+                <li class="gris pedidos"><a class="logo2" onclick="met_pago()"><span class="fa fa-dollar"></span>Formas de pago<span class="fa fa-chevron-right pull-right"></span></a></li>
+                <li class="gris pedidos"><a class="logo2" href="pedido_domicilio.html"><span  class="fa fa-list"></span>Menú<span class="fa fa-chevron-right pull-right"></span></a></li>
+			</ul>
+		</aside>
+	</seccion>
+  <div class="col-md-12 nav-sup text-center bg-gris text-blanco">
+    <div class="logo pull-left valing-baseline inline"><img src="img/imgLogo.png"></div>
+    <h1 class="titulo text-center inline valing-baseline text-blanco"><span style="font-size:.7em; margin-left:70px;">Promociones Cerca de mi</span></h1>
+    <div class="btn-regresar pull-right inline valing-baseline"><!--<a><span class="fa fa-bars mn"></span></a>--><a id='btnRegreso' href="todasLasPromociones.html"><span class="fa fa-arrow-circle-o-left"></span></a></div>
+  </div>
+  <div class="row col-md-12 container" id="main">
+    <div id="sesionUsuario" class="margin-no-espacios hidden">
+        <div class="width50 floatLeft nombreUsuario">Bienvenido(a)</div>
+        <div class="width50 floatLeft text-right puntosUsuario">Tienes 640 pts</div>
+    </div>
+    <div class="text-center">
+      <div id='btnRegistrate' class="btnRegistrate sin-subr"><a href="pre-registro.html" class="sin-subr" style="text-decoration:none;"><i class="fa fa-hand-o-right"></i> ¿Quieres ver mejores promociones?</a></div><br>
+    
+      <ul class="margin-no-espacios text-blanco padding-0" style="height:50px">
+        <!--<li class="btn-azul  inline width50 valing-middle active sinBordeRedondeado floatLeft sinMargin"><a href="verPromocionesPrue.html" class="">Promociones cerca de mi</a></li>
+        <li class=" btn-azul  inline width50 valing-middle inactive sinBordeRedondeado floatLeft sinMargin"><a href="todasLasPromociones.html" class="">Todas las Promociones</a></li>-->
+        <a href="verPromocionesPrue.html" class="">
+            <img src="img/btn_promociones_cerca.png" style="width:45%;">
+        </a>
+        <a href="todasLasPromociones.html" class="">
+            <img src="img/btn_promociones_todas.png" style="width:45%;">
+        </a>
+      </ul>
+     <!--<div id='btnRegistrate' class=" btnRegistrate sin-subr"><a href="pre-registro.html" class="text-blanco sin-subr" style="text-decoration:none;">¿Quieres ver mejores promociones? <br/><i class="fa fa-hand-o-right"></i> "Regístrate aquí"</a></div>-->
+        <br>
+         <div id="googleMap" style="width:100%;height:300px;"></div>
+        
+        <div class="text-center" id="contenedorPromociones" style="overflow:auto;">
+        </div>
+        
+        
+        <div id="fade" class="overlay" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'"></div>
+    
+    <div id='btnRegistrate' class=" btnRegistrate sin-subr"><a href="pre-registro.html" class="text-blanco sin-subr" style="text-decoration:none;">¿Quieres ver mejores promociones? <br/><i class="fa fa-hand-o-right"></i> "Regístrate aquí"</a></div>
+    
+<!-- fin base semi-transparente -->
+ 
+<!-- ventana modal -->  
+	<div id="light" class="modal">
+        <div id="cerrarModal" onclick="cerrar_modal();">
+            <i class="fa fa-times fa-3x"></i>
+        </div>
+    	<p>¿Desea canjear esta promoción?<br>
+            <button onclick="cerrar_modal();" type="button" class="btn-gris text-right"><span class="fa fa-arrow-circle-left"> </span> Regresar</button>
+            <button onclick="modal2();" type="button" class="btn-gris text-right"><span class="fa fa-check-circle"> </span> Aceptar</button>  
+        </p>
+    </div>
+<!-- fin ventana modal -->
+    
+    <div id="fade2" class="overlay" onclick = "document.getElementById('light2').style.display='none';document.getElementById('fade').style.display='none'"></div>
+<!-- fin base semi-transparente -->
+ 
+<!-- ventana modal -->  
+	<div id="light2" class="modal2">
+        <div id="cerrarModal" onclick="cerrar_modal();">
+            <i class="fa fa-times fa-3x"></i>
+        </div>
+    	<h2 class="text-azul bullet">¡Operación exitosa!</h2>
+        <form>
+            <label>
+                <label id="msg2" class="text-azul" style="font-size:2em;"></label>
+            </label>
+        </form>
+        <p class="sinMargin">
+            Puedes hacer valida esta promoción presentando el siguiente QR Code <label class="text-azul"><b></b></label>
+        </p>
+        <div id="qr"></div>
+        <a>
+            <button type="" onclick="aceptar();" class="btn-gris text-left">
+                <span class="fa fa-check-circle"> </span> Aceptar
+            </button>
+        </a>
+    </div>
+<!-- fin ventana modal fa fa-arrow-circle-left -->
+<!-- fin ventana modal -->
+    <div id="fade4" class="overlay" onclick = "document.getElementById('light4').style.display='none';document.getElementById('fade4').style.display='none'"></div>
+<!-- fin base semi-transparente -->
+<!-- Ventana modal -->
+    <div id="light4" class="modal4">
+        <div id="cerrarModal" onclick="cerrar_modal();">
+            <i class="fa fa-times fa-3x"></i>
+        </div>
+        <div>
+            <img src="img/logo_wingstop_verde.png" width="80%"><br><br>
+            <span>Para utilizar nuestras promociones registrate con tu:</span><br><br>
+            <input id="nombreGenerico" type="text" class="form-control" placeholder="Nombre" value="">
+            <input id="emailGenerico"  type="text" class="form-control" placeholder="Email" value="">
+        </div>
+        <a>
+            <button type="" onclick="guardaRegistroGenerico();" class="btn-gris text-left">
+                <span class="fa fa-check-circle"> </span> Aceptar
+            </button>
+        </a><br>
+        <!--<span>ó</span><br>
+        <a>
+            <button type="" onclick="registroGenerico();" class="btn-gris text-left" style="backgroud-color:#0000ff;">
+                <span class="fa fa-check-circle"> </span> Conectar con facebook
+            </button>
+        </a>-->
+    </div>
+        
+  </div>
+    </div>
+  <div class="nav-inf bg-negro text-blanco" id="menus">
+    <!--<div class="btn-regresar pull-left inline valing-baseline mn2"><a href="#"><span class="fa fa-shopping-cart"></span></a></div>-->
+    <div class="btn-regresar pull-right inline valing-baseline mn"><a href="#"><span class="fa fa-bars "></span></a></div>
+  </div>
+  <!--JS--> 
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+  <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script> 
+  <!-- Include all compiled plugins (below), or include individual files as needed --> 
+  <script src="js/bootstrap.min.js"></script> 
+  <script src="js/prefixfree.min.js"></script>
+    <script src="js/localstorage.js"></script>
+     <script src="js/comun.js"></script>
+     <script src="js/verPromociones.js"></script>
+    <script src="js/menu_generico.js"></script>
+<script src="js/facebook.js"></script>
+    <script src="js/menu.js"></script>
+    <script src="js/main.js"></script>
+     <script type="text/javascript">
+    $(document).ready(function(){
+        //id='btnRegreso' href="categoriaProductos.html"
+        if(pughpharm.isLogged()){
+            $(".btnRegistrate").each(function(index){
+                $(this).css("display","none");
+            });
+            $(".titleWindow").html("&nbsp; Mis Promociones");
+        }else{
+            $("#btnRegreso").attr('href','index.html');
+            $(".btnRegistrate").each(function(index){
+                $(this).css("display","");
+            });
+        }//if
+        
+        if(localStorage.getItem('uso_cupon')){
+            document.getElementById("menus").style.display="block";
+         $('#menus').append('<img onclick="modal2();" src="img/imgQRCode.jpg"><br/><br/><p class="text-azul">Tu código es: <label class="text-azul msg3"></label></p></div>');
+             $('.msg3').html(localStorage.getItem("uso_cupon"));
+            $('#msg2').html(localStorage.getItem("uso_cupon"));
+        }//if
+        //if(pughpharm.isLogged()){
+        //}else{
+        //    window.location="index.html"
+        //}//if
+    });
+    
+    function guardaRegistroGenerico(){
+        var re=/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if(jQuery.trim($("#nombreGenerico").val())==""){
+            alert("Tienes que escribir un nombre");
+        }else if(jQuery.trim($("#emailGenerico").val())==""){
+            alert("Tienes que escribir un email");
+        }else if(!re.test($("#emailGenerico").val())){
+            alert("No es un correo valido");
+        }else{
+            comun.guardarRegistroGenerico(
+                $("#nombreGenerico").val(),
+                '',
+                $("#emailGenerico").val(),
+                '',
+                '',
+                cerrar_modal
+            );
+        }//if
+    }//function
+    </script>
+        <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC_JcwZiLASKPD2GXxNq5JZO6dXJ6fkPuk"></script>
+    
+    <script>
+        var MiPosicion ='';
+        var pointMarker= new Array();//store marker in array
+        var Destinos   = new Array();//store positions in array
+        document.addEventListener("deviceready", function(){
+            $.ajax({
+                url:ruta_generica,
+                type: 'POST',
+                data:{
+                    funcion:   'dameSucursales',
+                    idCliente: cliente
+                },
+                success:function(resp){ 
+                    resp=JSON.parse(resp);
+                    if(resp[0].error==''){
+                        dibujaMapa(resp);
+                    }else{
+                        $("#alertaLogin").html(resp.error).show();
+                    }//if
+                }
+            });
+        }, false);
+        
+        function dibujaMapa(sucu){
+            navigator.geolocation.getCurrentPosition(function(position){
+            var MiPosicion = position.coords.latitude+","+position.coords.longitude;
+            //var MiPosicion="20.6665818,-103.4107339";
+            var mapProp = {
+                center:new google.maps.LatLng(position.coords.latitude,position.coords.longitude),
+                //center:new google.maps.LatLng(20.6665818,-103.4107339),
+                zoom:13, mapTypeId:google.maps.MapTypeId.ROADMAP
+            };
+            var map=new google.maps.Map(document.getElementById("googleMap"), mapProp);
+            var marker=new google.maps.Marker({
+                position:new google.maps.LatLng(position.coords.latitude,position.coords.longitude)
+            });
+            marker.setMap(map);
+            for(var i=0; i<=sucu.length-1; i++){
+                var latit=parseFloat(sucu[i].latitud).toFixed(6);
+                var longi=parseFloat(sucu[i].longitud).toFixed(6);
+                if(!isNaN(latit) && !isNaN(longi) && sucu[i].nombre!='' && sucu[i].nombre!=null){
+                    var tempPosi=MiPosicion.split(",");
+                    var tempDist=comun.findDistance(tempPosi[0],tempPosi[1],latit,longi);
+                    console.log(sucu[i].nombre+" a "+tempDist+"km ");
+                    if(tempDist>2)
+                        continue;
+                    console.log("mostrar");
+                    miSucursal =new google.maps.LatLng(latit,longi);
+                    Destinos[i]=latit+","+longi;
+                    pointMarker[i]=new google.maps.Marker({
+                        position: miSucursal,
+                        map: map,
+                        animation: google.maps.Animation.BOUNCE,
+                        title: sucu[i].nombre
+                    });
+                    google.maps.event.addListener(pointMarker[i], 'click', function(evt){
+                        var destino = evt.latLng.lat().toFixed(6)+","+evt.latLng.lng().toFixed(6);
+                        console.log("Abriendo las siguientes coordenadas: "+destino);
+                        abrirGoogleMaps(MiPosicion,destino);
+                        //window.open("blog/page01.html","_blank","toolbar=yes, location=yes, directories=no, status=no, menubar=yes, scrollbars=yes, resizable=yes, copyhistory=yes");
+                    });
+                }//if
+            }//for
+            }, function(error){
+                alert("Ve a configuración y activa tu GPS/ubicación");
+                if(error.code == PositionError.PERMISSION_DENIED)
+                {
+                    alert("App doesn't have permission to use GPS");
+                }
+                else if(error.code == PositionError.POSITION_UNAVAILABLE)
+                {
+                    alert("No GPS device found");
+                }
+                else if(error.code == PositionError.TIMEOUT)
+                {
+                    alert("Its taking too long find user location");
+                }
+                else
+                {
+                    alert("An unknown error occured");
+                }
+            }, { maximumAge: 3000, timeout: 5000, enableHighAccuracy: true });
+        }//function
+        
+        function abrirGoogleMaps(origen,destino){
+            launchnavigator.navigate(destino, {start: origen,
+                appSelectionDialogHeader:"Seleccione una aplicación de navegación",
+                appSelectionCancelButton:"Cancelar",
+            });
+        }//function
+        
+        function modal(a,rutaImg,nombre,descripcion){
+            //alert(a);
+            if(pughpharm.isLogged() || tieneDatosGenericos()){
+                localStorage['cupon_tem'] = a;
+                localStorage['cupon_img'] = rutaImg;
+                localStorage['cupon_nom'] = nombre;
+                localStorage['cupon_txt'] = descripcion;
+                if(!pughpharm.isLogged()){
+                    document.getElementById('light').style.display='block';
+                    document.getElementById('fade').style.display='block';
+                    $('.msg3').html(localStorage.getItem("cupon_tem"));
+                    $('#msg2').html(localStorage.getItem("cupon_tem"));
+                }else{
+                    window.location="detallePromocion.html";
+                }//if
+            }else{
+                document.getElementById('light4').style.display='block';
+                document.getElementById('fade4').style.display ='block';
+            }//if
+        }//function
+         function cerrar_modal(){
+            document.getElementById('light').style.display='none';
+            document.getElementById('fade').style.display='none';
+            document.getElementById('light2').style.display='none';
+            document.getElementById('fade2').style.display='none';
+            document.getElementById('light4').style.display='none';
+            document.getElementById('fade4').style.display='none';
+        }
+        function modal2(){
+            //alert("modal2");
+            document.getElementById('light').style.display='none';
+            document.getElementById('fade').style.display='none';
+            document.getElementById('light2').style.display='block';
+            document.getElementById('fade2').style.display='block';
+            update_qrcode2('msg2');
+        }
+        function aceptar(){
+            //document.getElementById("menus").style.display="block";
+            // document.getElementById("menus").innerHTML="";
+            //$('#menus').append('<img onclick="modal2();" src="img/imgQRCode.jpg"><br/><br/><p class="text-azul">Tu código es: <label class="text-azul msg3"></label></p></div>');
+            //localStorage.setItem('uso_cupon',localStorage['cupon_tem']);
+            //$('#msg2').html(localStorage.getItem("uso_cupon"));
+            //$('.msg3').html(localStorage.getItem("uso_cupon"));
+            //update_qrcode2('msg2');
+            cerrar_modal();
+        }
+        $(document).ready(function(){
+            mostrarCuponesHorizontal();
+            if(!(pughpharm.isLogged() || tieneDatosGenericos())){
+                document.getElementById('light4').style.display='block';
+                document.getElementById('fade4').style.display ='block';
+            }//if
+        });
+        function tieneDatosGenericos(){
+            var reGe=JSON.parse(localStorage.getItem("registroGenerico"));
+            return reGe!=null && reGe["email"]!="";
+        }//function
+    </script>
+</body>
+</html>

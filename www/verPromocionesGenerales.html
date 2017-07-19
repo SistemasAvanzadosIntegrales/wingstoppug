@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <!--CSS-->
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="css/menu.css" />
+    <link rel="stylesheet" href="css/modal.css">
+    <script src="intelxdk.js"></script>         
+    <script src="cordova.js"></script>          
+    <script src="xhr.js"></script>              
+    <script src="js/app.js"></script>
+    <script src="js/init-app.js"></script>
+    <script src="js/init-dev.js"></script>
+    <script src="js/qrcode.js"></script>
+</head>
+<body onclick="afuera();">
+
+    <header id="menu_generico"></header>
+    
+    <seccion class="pull-right">
+        <aside  class="pull-right">
+			<ul>
+                <li class="gris pedidos"><a class="logo2" href="pedido.html"><span  class="fa fa-eye"></span>Mis pedidos<span class="fa fa-chevron-right pull-right"></span></a></li>
+				<li class="gris pedidos"><a class="logo2" href="pedido_producto.html"><span class="fa fa-shopping-cart"></span>Mi carrito<span class="fa fa-chevron-right pull-right"></span></a></li>
+                <li class="gris pedidos"><a class="logo2" onclick="met_pago()"><span class="fa fa-dollar"></span>Formas de pago<span class="fa fa-chevron-right pull-right"></span></a></li>
+                <li class="gris pedidos"><a class="logo2" href="pedido_domicilio.html"><span  class="fa fa-list"></span>Menú<span class="fa fa-chevron-right pull-right"></span></a></li>
+			</ul>
+		</aside>
+	</seccion>
+    
+    <div class="col-md-12 nav-sup text-center bg-gris text-blanco">
+        <div class="logo pull-left valing-baseline inline"><img src="img/imgLogo.png"></div>
+        <h1 class="titulo text-center inline valing-baseline text-blanco"><span class="fa fa-user"></span> Promociones generales</h1>
+        <div class="btn-regresar pull-right inline valing-baseline"><!--<a><span class="fa fa-bars mn"></span></a>--><a id='btnRegreso' href="todasLasPromociones.html"><span class="fa fa-arrow-circle-o-left"></span></a></div>
+    </div>
+    
+    <div class="row col-md-12 container" id="main">
+        <div class="text-center">
+            <div id='btnRegistrate' class="btn-azul margin-centro sin-subr"><a href="pre-registro.html" class="text-blanco sin-subr" style="text-decoration:none;"> <span class="fa fa-check-square-o"> </span> Quiero ser Wingstop Rewards.</a></div>
+            <div class="text-center" id="contenedorPromociones" style="overflow:auto;"></div>
+            <div id="fade" class="overlay" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'"></div>
+            
+        
+            <div id="light" class="modal">
+                <p>Desea utilizar este cupon?<br><button onclick="cerrar_modal();" type="button" class="btn-gris text-right"> Cancelar</button><button onclick="modal2();" type="button" class="btn-gris text-right"> Aceptar</button>  </p>
+            </div>
+            <div id="fade2" class="overlay" onclick = "document.getElementById('light2').style.display='none';document.getElementById('fade').style.display='none'"></div>
+            <div id="light2" class="modal2">
+                <h2 class="text-azul bullet">¡Operación exitosa!</h2>
+                <div id="qr"></div>
+                <form>
+                    <label>Código <label id="msg2" class="text-azul"> </label> </label>
+                </form>
+                <p>Cupón publico <label class="text-azul"><b>WING-STOP</b></label> canjealo presentando el siguiente código en cualquiera de nuestras sucursales</p>
+                <a><button type="" onclick="aceptar();" class="btn-gris text-left"><span class="fa fa-check-circle"> </span> Aceptar</button></a>
+            </div>
+        </div>
+    </div>
+    <div class="nav-inf bg-negro text-blanco" id="menus">
+        <!--<div class="btn-regresar pull-left inline valing-baseline mn2"><a href="#"><span class="fa fa-shopping-cart"></span></a></div>-->
+        <div class="btn-regresar pull-right inline valing-baseline mn"><a href="#"><span class="fa fa-bars "></span></a></div>
+    </div>
+    <!--JS--> 
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+    <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script> 
+    <!-- Include all compiled plugins (below), or include individual files as needed --> 
+    <script src="js/bootstrap.min.js"></script> 
+    <script src="js/prefixfree.min.js"></script>
+    <script src="js/localstorage.js"></script>
+    <script src="js/comun.js"></script>
+    <script src="js/verPromociones.js"></script>
+    <script src="js/menu_generico.js"></script>
+    <script src="js/facebook.js"></script>
+    <script src="js/menu.js"></script>
+    <script src="js/main.js"></script>
+    <script type="text/javascript">
+        function modal(a){
+            //alert(a);
+            localStorage['cupon_tem'] = a;
+            document.getElementById('light').style.display='block';
+            document.getElementById('fade').style.display='block';
+            $('.msg3').html(localStorage.getItem("cupon_tem"));
+            $('#msg2').html(localStorage.getItem("cupon_tem"));
+        }
+        function cerrar_modal(){
+            document.getElementById('light').style.display='none';
+            document.getElementById('fade').style.display='none';
+            document.getElementById('light2').style.display='none';
+            document.getElementById('fade2').style.display='none';
+        }
+        function modal2(){
+            document.getElementById('light').style.display='none';
+            document.getElementById('fade').style.display='none';
+            document.getElementById('light2').style.display='block';
+            document.getElementById('fade2').style.display='block';
+            update_qrcode2('msg2');
+        }
+        function aceptar(){
+            //document.getElementById("menus").style.display="block";
+            // document.getElementById("menus").innerHTML="";
+            //$('#menus').append('<img onclick="modal2();" src="img/imgQRCode.jpg"><br/><br/><p class="text-azul">Tu código es: <label class="text-azul msg3"></label></p></div>');
+            //localStorage.setItem('uso_cupon',localStorage['cupon_tem']);
+            //$('#msg2').html(localStorage.getItem("uso_cupon"));
+            //$('.msg3').html(localStorage.getItem("uso_cupon"));
+            //update_qrcode2('msg2');
+            cerrar_modal();
+        }
+        $(document).ready(function(){
+            //id='btnRegreso' href="categoriaProductos.html"
+            if(pughpharm.isLogged()){
+                $("#btnRegreso").attr('href','categoriaProductos.html');
+                $("#btnRegistrate").css("display","none");
+            }else{
+                $("#btnRegreso").attr('href','index.html');
+                $("#btnRegistrate").css("display","");
+            }//if
+
+            if(localStorage.getItem('uso_cupon')){
+                document.getElementById("menus").style.display="block";
+             $('#menus').append('<img onclick="modal2();" src="img/imgQRCode.jpg"><br/><br/><p class="text-azul">Tu código es: <label class="text-azul msg3"></label></p></div>');
+                 $('.msg3').html(localStorage.getItem("uso_cupon"));
+                $('#msg2').html(localStorage.getItem("uso_cupon"));
+            }//if
+            //if(pughpharm.isLogged()){
+            //}else{
+            //    window.location="index.html"
+            //}//if
+        });
+    </script> 
+    <script>        
+            $(document).ready(function(){
+                mostrarCuponesHorizontal();
+            });
+    </script>
+</body>
+</html>

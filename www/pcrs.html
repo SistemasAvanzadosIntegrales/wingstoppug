@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title></title>
+
+<!-- Bootstrap -->
+<link href="css/bootstrap.css" rel="stylesheet">
+
+<!--CSS-->
+<link rel="stylesheet" href="css/main.css" />
+<link rel="stylesheet" href="css/font-awesome.css">
+<link rel="stylesheet" href="css/menu.css">
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+    <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+      <script type="text/javascript" src="js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="js/jquery.browser.js"></script>
+    <script type="text/javascript" src="js/snog-2.5.27.js"></script>
+    <script type="text/javascript" src="js/snog-2.5.27-widget.js"></script>
+    <script type="text/javascript" src="js/snog-config.js"></script>
+        <script type="text/javascript">
+     function loginRealm()
+    {
+        snog_dispatcher.broadcast(Snog.events.REALM_LOGIN, {token: "cb6e21d4f679edf058be50c19ba3f340", realm:"easier_loyalty"});
+    }
+
+    function getCommunityMissions()
+    {
+        snog_dispatcher.broadcast(Snog.events.GET_REWARDS);
+    }
+
+     function getMyCommunityMissions()
+    {
+        snog_dispatcher.broadcast(Snog.events.GET_REWARDS_INSTANCES, {player_id:3});
+    }
+    /*function getMilestones()
+    {
+        snog_dispatcher.broadcast(Snog.events.GET_MILESTONES);
+    }
+
+    function readMilestone(milestoneRef)
+    {
+        snog_dispatcher.broadcast(Snog.events.READ_MILESTONE, { milestone_ref:milestoneRef });
+    }*/
+
+
+    $(document).ready(function(){
+        bag=null;
+        boardInstance=null;
+        // Initialize Snog engine;
+        Snog.all();
+        Snog.debug = false;
+
+        snog_data = Snog.require('data');
+        snog_dispatcher = Snog.require('dispatcher');
+        snog_widget = Snog.require('widget');
+        snog_facebook = Snog.require('facebook');
+        new_batch_flag=true;
+
+         loginRealm();
+
+        snog_dispatcher.on(Snog.events.LOGIN_SUCCESS, function (data) 
+        {
+            $(".btnHidden").show();
+        });
+
+        snog_dispatcher.on(Snog.events.GET_REWARDS_SUCCESS, function (data) 
+        {
+            $("#communityMissions").html('');
+            jQuery.each(data.rewards, function(i, val) 
+            {
+
+                jQuery.each(val.metadata, function(i, meta) 
+                {
+                    
+                    if(meta.key=='reward_type' && meta.value=='community_milestone')
+                    {
+                        $( '<center><b>'+val.title+'</b><img src="'+val.assets[0].uri+'"></center><br><br>' ).appendTo( "#communityMissions" );
+                    }
+
+                    if(meta.key=='reward_type' && meta.value=='step_community_mission')
+                    {
+                        
+                    }
+                });
+                
+            });
+        });
+
+
+        snog_dispatcher.on(Snog.events.GET_REWARDS_INSTANCES_SUCCESS, function (data) 
+        {
+            $("#communityMissions").html('');
+            jQuery.each(data.rewards, function(i, val) 
+            {
+
+                jQuery.each(val.metadata, function(i, meta) 
+                {
+                    
+                    if(meta.key=='reward_type' && meta.value=='community_milestone')
+                    {
+                        $( '<center><b>'+val.title+'</b><img src="'+val.assets[0].uri+'"><br></center><br>' ).appendTo( "#communityMissions" );
+                    }
+
+                    if(meta.key=='reward_type' && meta.value=='step_community_mission')
+                    {
+                        alert(meta.commnitymission);
+                        meta.step_value
+                    }
+                });
+                
+            });
+        });
+
+
+        snog_dispatcher.on(Snog.events.NOTIFICATION, function(data)
+        {
+            console.log("NOTIFICACION: ", data);
+        });
+
+        
+
+    });
+    </script>
+
+</head>
+<body onclick="afuera();">
+
+    <header id="menu_generico">
+        
+      </header>
+
+    
+       <seccion class="pull-right">
+		<aside  class="pull-right">
+			<ul>
+                <li class="gris pedidos"><a class="logo2" href="pedido.html"><span  class="fa fa-eye"></span>Mis pedidos<span class="fa fa-chevron-right pull-right"></span></a></li>
+				<li class="gris pedidos"><a class="logo2" href="pedido_producto.html"><span class="fa fa-shopping-cart"></span>Mi carrito<span class="fa fa-chevron-right pull-right"></span></a></li>
+                <li class="gris pedidos"><a class="logo2" onclick="met_pago()"><span class="fa fa-dollar"></span>Formas de pago<span class="fa fa-chevron-right pull-right"></span></a></li>
+                <li class="gris pedidos"><a class="logo2" href="pedido_domicilio.html"><span  class="fa fa-list"></span>Menú<span class="fa fa-chevron-right pull-right"></span></a></li>
+			</ul>
+		</aside>
+	</seccion>
+    
+<div class="col-md-12 nav-sup text-center bg-gris text-blanco">
+  <div class="logo pull-left valing-baseline inline"><img src="img/imgLogo.png"></div>
+  <h1 class="titulo text-center inline valing-baseline text-blanco"><span class="fa fa-trophy"></span> Misiones</h1>
+  <div class="btn-regresar pull-right inline valing-baseline"><a href="miPerfil.html"><span class="fa fa-arrow-circle-o-left"></span></a></div>
+</div>
+<div class="row col-md-12 container" id="main">
+
+    <div data-example-id="btn-variants" class="bs-example"> 
+        <!--<button class="btn btn-default" type="button" onclick="loginRealm();">Login</button> 
+<button class="btn btn-success btnHidden" onclick="getMyCommunityMissions();" type="button" style="display:none">My commnity missions</button>
+-->
+        <button class="btn btn-success btnHidden" onclick="getCommunityMissions();" type="button" style="display:none">Get commnity missions</button>
+        
+    </div>
+    <br><br>
+    <div class="row btnHidden" style="display:none;">
+        <div class="col-md-4">
+            <h3>Community missions disponibles</h3>
+            <div class="row" id="communityMissions" style="overflow:auto; height:400px; padding-left: 25px;">
+            
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <h3>Community missions en los que participo</h3>
+            <div class="row" id="communityMissionsParticipo" style="overflow:auto; height:400px; padding-left: 25px;">
+            
+            </div>
+        </div>
+        
+
+
+    </div>
+
+</div>
+<div class="nav-inf bg-negro text-blanco" id="menus">
+  <div class="btn-regresar pull-left inline valing-baseline mn2"><a href="#"><span class="fa fa-shopping-cart "></span></a></div>
+  <div class="btn-regresar pull-right inline valing-baseline mn"><a href="#"><span class="fa fa-bars "></span></a></div>
+</div>
+
+<!--JS--> 
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+
+
+<!-- Include all compiled plugins (below), or include individual files as needed --> 
+<script src="js/bootstrap.min.js"></script> 
+<script src="js/prefixfree.min.js"></script>
+    <script src="js/localstorage.js"></script>
+    <script src="js/comun.js"></script>
+    <script src="js/menu_generico.js"></script>
+<script src="js/facebook.js"></script>
+    <script src="js/menu.js"></script>
+
+</body>
+</html>

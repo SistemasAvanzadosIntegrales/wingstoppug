@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title></title>
+
+<!-- Bootstrap -->
+<link href="css/bootstrap.css" rel="stylesheet">
+
+<!--CSS-->
+<link rel="stylesheet" href="css/main.css" />
+<link rel="stylesheet" href="css/font-awesome.css">
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body onclick="afuera();">
+    
+<div class="col-md-12 nav-sup text-center bg-gris text-blanco">
+	<div class="logo pull-left valing-baseline inline"><img src="img/imgLogo.png"></div>
+	<h1 class="titulo text-center inline valing-baseline text-blanco"><span class="fa fa-credit-card"></span> Wild Card</h1>
+	<div class="btn-regresar pull-right inline valing-baseline"><a href="#"><span class="fa fa-arrow-circle-o-left"></span></a></div>
+</div> 
+
+<div class="row col-md-12 container" id="main">
+<div class="text-center">
+
+<p> Escoge la colección en la que deseas utilizar tu <b>Wild Card</b>
+	<br/><br/>
+    </p>	
+
+<div class="contenedor-left">
+<div class="willCards inline">
+	<p class=" text-right text-azul">0/6</p>
+	<img src="img/chekOnPremio01.png" class="img-icono">
+	<p>Sorpresa</p>
+</div>
+
+<div class="willCards inline">
+	<p class=" text-right text-azul">2/6</p>
+	<img src="img/chekOnPremio03.png" class="img-icono">
+	<p>Camisa</p>
+</div>
+
+<div class="willCards inline">
+	<p class=" text-right text-azul">0/6</p>
+	<img src="img/chekOnPremio05.png" class="img-icono">
+	<p>Combo</p>
+</div>
+<div class="willCards inline">
+	<p class=" text-right text-azul">4/6</p>
+	<img src="img/chekOnPremio06.png" class="img-icono">
+	<p>Bebida</p>
+</div>
+<div class="willCards inline">
+	<p class=" text-right text-azul">0/6</p>
+	<img src="img/chekOnPremio08.png" class="img-icono">
+	<p>Cine</p>
+</div>
+</div>
+
+</div>
+</div>
+<div class="nav-inf bg-negro text-blanco" id="menus">
+	<div class="btn-regresar pull-left inline valing-baseline mn2"><a href="#"><span class="fa  fa-shopping-cart"></span></a></div>
+
+	<div class="btn-regresar pull-right inline valing-baseline mn"><a href="#"><span class="fa fa-bars"></span></a></div>
+
+</div> 
+ 
+ 
+<!--JS-->
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.min.js"></script>
+<script src="js/prefixfree.min.js"></script>
+<script src="js/menu.js"></script>
+<script src="js/localstorage.js"></script>
+ <script src="js/comun.js"></script>
+    <script src="js/main.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+         if(pughpharm.isLogged()){
+                
+            } else{
+                window.location = "index.html"
+            }
+    });
+    </script>
+</body>
+</html>

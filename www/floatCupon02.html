@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title> </title>
+
+<!-- Bootstrap -->
+<link href="css/bootstrap.css" rel="stylesheet">
+
+<!--CSS-->
+<link rel="stylesheet" href="css/main.css" />
+<link rel="stylesheet" href="css/font-awesome.css">
+ <script src="cordova.js"></script>          <!-- phantom library, needed for Cordova api calls, added during build -->
+    <script src="js/app.js"></script>           <!-- recommended location of your JavaScript code relative to other JS files -->
+    <script src="xdk/init-dev.js"></script>
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+<script src="js/qrcode.js"></script>
+</head>
+<body>
+  <div class="col-md-12 nav-sup text-center bg-gris text-blanco">
+	<div class="logo pull-left valing-baseline inline"><img src="img/imgLogo.png"></div>
+	<h1 class="titulo text-center inline valing-baseline text-blanco">Registro</h1>
+	<div class="btn-regresar pull-right inline valing-baseline"><a href="index.html" ><span class="fa fa-arrow-circle-o-left"></span></a></div>
+</div>  
+
+
+<div class="row col-md-12 container" id="main">
+    <div><p class="text-center"></p>
+  			<form  class="form-group text-right">
+                <center>
+                    <label style="color:rgb(1,105,54)"><!--<img style="max-width:250px" src="img/logo_blanco.png" />-->
+                        ¡Muchas gracias por registrarte!<span id="lblAdicional">
+                        Presenta este Código QR
+                        en cualquiera de nuestras sucursales
+                        para terminar el registro</span></label>
+                </center>
+    			<center><label id="msg" class="text-azul" style="font-size:1.5em; font-weinght:bold;"></center></label><!-- hidden -->
+                <div id="qr" class="text-center"></div>
+			</form>
+            <center><img src="img/ingresarAMiCuenta.png" onclick="act();" width="80%"></center><br>
+            <center><img src="img/registrarOtraCuenta.png" onclick="registrarOtraCuenta();" width="80%"></center><br>
+            <!--<div class="text-center width100 btnIngresar">
+                <button onclick="registrarOtraCuenta();" class="btn-azul text-center width80">
+                    <span class=""></span> Registrar otra cuenta
+                </button>
+            </div>-->
+            <div id="menus"></div>
+      </div>
+</div>
+
+
+<!--<div class="ventana margin-centro">
+	<h2 class="text-azul bullet">¡Operación exitosa!</h2>
+     <p>Puedes recoger tu tarjeta de lealtad <label class="text-azul"><b>WING-STOP</b></label> presentando el siguiente código en cualquiera de nuestras sucursales</p>
+		<div id="qr"></div>
+    <form>
+<label id="msg" class="text-azul"></label> 
+</form>
+    
+    <p>Tambien puede recogerla mencionando el correo electronico que has dado de alta</p>
+    <a href="index.html"><button type="" onclick="act();" class="btn-gris text-left"><span class="fa fa-check-circle"> </span> Aceptar</button></a>
+    <a ><button type="" onclick="validar_cupon();" class="btn-gris text-right"><span class="fa fa-check-circle"> </span>Validar Cupón</button></a>
+    </div>
+	 
+ <div id="menus"></div>-->
+<!--JS-->
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.min.js"></script>
+<script src="js/prefixfree.min.js"></script>
+    <script src="js/localstorage.js"></script>
+    <script src="js/comun.js"></script>
+    <script type="text/javascript">
+       var yafueUsado=false;
+       $(document).ready(function(){
+            if(localStorage.getItem('codigo_qr')){
+                //verificar si ya se canjeo el codigo qr
+                verificarCodigoQRYaFueUsado(yaFueUsado, noFueUsado);
+            }//if
+       });
+        
+        function act(){
+            window.location = "usuarioLealtad.html";//"floatCupon02.html";
+        }//function
+        
+        function yaFueUsado(){
+            yafueUsado=true;
+            $("#qr").addClass("hidden");
+            //$(".btnIngresar").addClass("hidden");
+            //$("#lblAdicional").addClass("hidden");
+            console.log("TRUE~");
+        }//function
+        
+        function noFueUsado(){
+            yafueUsado=false;
+            $('#msg').html(localStorage.getItem('codigo_qr'));
+            update_qrcode2('msg'); 
+            $("#qr").removeClass("hidden");
+            $(".btnIngresar").removeClass("hidden");
+            console.log("FALSE~");
+        }//function
+        
+        function registrarOtraCuenta(){
+            if(!yafueUsado && confirm("Para registrar otra cuenta, Primero debes eliminar el preregistro actual.\r\n¿Deseas eliminar el registro actual?")){
+                localStorage.removeItem('codigo_qr');
+                window.location="pre-registro.html";
+            }else{
+                window.location="pre-registro.html";
+            }//if
+        }//function
+    </script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+ .overlay{
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        z-index:1001;
+		opacity:.75;
+        -moz-opacity: 0.75;
+        filter: alpha(opacity=75);
+    }
+	
+    /* estilo para lo q este dentro de la ventana modal */
+    .modal{
+        display: none;
+        position: fixed;
+        top: 40%;
+        left: 10%;
+        width: 80%;
+        height: auto;
+        padding: 16px;
+        background: #fff;
+		color: #333;
+        z-index:1002;
+        /*overflow: auto;*/
+        border-radius: 5%;
+    }
+    #cerrarModal{
+        position: absolute;
+        left: 95%;
+        top: -25px;
+        color: #da3c2e;
+    }
+  .modal2 {
+        display: none;
+        position: absolute;
+        top: 10%;
+        left: 10%;
+        width: 80%;
+        height: auto;
+        padding: 16px;
+        background: #fff;
+		color: #333;
+        z-index:1002;
+        /*overflow: auto;*/
+        border-radius: 5%;
+}
+
+ .modal3 {
+        display: none;
+        position: absolute;
+        top: 10%;
+        left: 10%;
+        width: 80%;
+        height: auto;
+        padding: 16px;
+        background: #fff;
+		color: #333;
+        z-index:1002;
+        /*overflow: auto;*/
+        border-radius: 5%;
+}
+
+ .modal4 {
+        display: none;
+        position: absolute;
+        top: 10%;
+        left: 10%;
+        width: 80%;
+        height: auto;
+        padding: 16px;
+        background: #fff;
+		color: #333;
+        z-index:1002;
+        /*overflow: auto;*/
+        border-radius: 5%;
+}

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title></title>
+
+<!-- Bootstrap -->
+<link href="css/bootstrap.css" rel="stylesheet">
+
+<!--CSS-->
+<link rel="stylesheet" href="css/main.css" />
+<link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="css/menu.css">
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body onclick="afuera();">
+     <header id="menu_generico">
+        
+      </header>
+    
+       <seccion class="pull-right">
+		<aside  class="pull-right">
+			<ul>
+                <li class="gris pedidos"><a class="logo2" href="pedido.html"><span  class="fa fa-eye"></span>Mis pedidos<span class="fa fa-chevron-right pull-right"></span></a></li>
+				<li class="gris pedidos"><a class="logo2" href="pedido_producto.html"><span class="fa fa-shopping-cart"></span>Mi carrito<span class="fa fa-chevron-right pull-right"></span></a></li>
+                <li class="gris pedidos"><a class="logo2" onclick="met_pago();"><span class="fa fa-dollar"></span>Formas de pago<span class="fa fa-chevron-right pull-right"></span></a></li>
+                <li class="gris pedidos"><a class="logo2" href="pedido_domicilio.html"><span  class="fa fa-list"></span>Menú<span class="fa fa-chevron-right pull-right"></span></a></li>
+			</ul>
+            <div class="text-center">
+	          <center><a onclick="salir();"><button class="btn btn-gris"><span class="fa fa-sign-out"></span> Sali de la aplicación</button></a></center> </div>
+		</aside>
+	</seccion>
+<div class="col-md-12 nav-sup text-center bg-gris text-blanco">
+	<div class="logo pull-left valing-baseline inline"><img src="img/imgLogo.png"></div>
+	<h1 class="titulo text-center inline valing-baseline text-blanco"><span class="fa fa-hand-stop-o"></span> Politicas de privacidad</h1>
+	<div class="btn-regresar pull-right inline valing-baseline"><a href="misDatos.html"><span class="fa fa-arrow-circle-o-left"></span></a></div>
+</div> 
+
+<div class="row col-md-12 container" id="main">
+<div class="text-center">
+
+<h2 class="text-azul bullet">Políticas de Privacidad</h2>
+<p class="text-justify">Chai, con domicilio conocido, es responsable de recabar sus datos personales, del uso que se le dé a los mismos y de su protección.
+La información personal que proporcionó será utilizada para recibir los beneficios del programa de lealtad de clientes, informarle sobre cambios en los mismos, evaluar la calidad del servicio y para fines publicitarios.
+Usted tiene derecho de acceder, rectificar y cancelar sus datos personales, así como de oponerse al tratamiento de los mismos o revocar el consentimiento que para tal fin nos haya otorgado, a través de los procedimientos que hemos implementado. Para conocer dichos procedimientos, los requisitos y plazos, se puede poner en contacto con nuestro departamento de datos personales al e-mail:sistemas@chai.com.mx ó visitar nuestra página web www.chai.com.mx<br/> 
+Asimismo, le informamos que sus datos personales pueden ser transferidos y tratados dentro y fuera del país, por personas distintas a esta empresa. En ese sentido, su información puede ser compartida con Chai, para recibir los beneficios del programa de lealtad de clientes, informarle sobre cambios en los mismos, evaluar la calidad del servicio y para fines publicitarios. Si usted no manifiesta su oposición para que sus datos personales sean transferidos, se entenderá que ha otorgado su consentimiento para ello.
+<br/>
+
+Eu sit tincidunt incorrupte definitionem, vis mutat affert percipit cu, eirmod consectetuer signiferumque eu per. In usu latine equidem dolores. Quo no falli viris intellegam, ut fugit veritus placerat per. Ius id vidit volumus mandamus, vide veritus democritum te nec, ei eos debet libris consulatu. No mei ferri graeco dicunt, ad cum veri accommodare. Sed at malis omnesque delicata, usu et iusto zzril meliore.</p>
+
+
+</div>
+</div>
+<div class="nav-inf bg-negro text-blanco" id="menus">
+	<div class="btn-regresar pull-left inline valing-baseline mn2"><a href="#"><span class="fa  fa-shopping-cart"></span></a></div>
+
+	<div class="btn-regresar pull-right inline valing-baseline mn"><a href="#"><span class="fa fa-bars"></span></a></div>
+
+</div> 
+ 
+<!--JS-->
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.min.js"></script>
+<script src="js/prefixfree.min.js"></script>
+    <script src="js/localstorage.js"></script>
+    <script src="js/comun.js"></script>
+    <script src="js/menu_generico.js"></script>
+<script src="js/facebook.js"></script>
+    <script src="js/menu.js"></script>
+     <script type="text/javascript">
+    $(document).ready(function(){
+         if(pughpharm.isLogged()){
+                
+            } else{
+                window.location = "index.html"
+            }
+    });
+    </script>
+</body>
+</html>

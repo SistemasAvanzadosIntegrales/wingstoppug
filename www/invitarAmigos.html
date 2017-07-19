@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title></title>
+
+<!-- Bootstrap -->
+<link href="css/bootstrap.css" rel="stylesheet">
+
+<!--CSS-->
+<link rel="stylesheet" href="css/main.css" />
+<link rel="stylesheet" href="css/font-awesome.css">
+<link rel="stylesheet" href="css/menu.css" />
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body onclick="afuera();">
+
+       <header id="menu_generico">
+        
+      </header>
+    
+       <seccion class="pull-right">
+		<aside  class="pull-right">
+			<ul>
+                <li class="gris pedidos"><a class="logo2" href="pedido.html"><span  class="fa fa-eye"></span>Mis pedidos<span class="fa fa-chevron-right pull-right"></span></a></li>
+				<li class="gris pedidos"><a class="logo2" href="pedido_producto.html"><span class="fa fa-shopping-cart"></span>Mi carrito<span class="fa fa-chevron-right pull-right"></span></a></li>
+                <li class="gris pedidos"><a class="logo2" onclick="met_pago()"><span class="fa fa-dollar"></span>Formas de pago<span class="fa fa-chevron-right pull-right"></span></a></li>
+                <li class="gris pedidos"><a class="logo2" href="pedido_domicilio.html"><span  class="fa fa-list"></span>Menú<span class="fa fa-chevron-right pull-right"></span></a></li>
+			</ul>
+		</aside>
+	</seccion>
+    
+<div class="col-md-12 nav-sup text-center bg-gris text-blanco">
+	<div class="logo pull-left valing-baseline inline"><img src="img/imgLogo.png"></div>
+	<h1 class="titulo text-center inline valing-baseline text-blanco"><span class="fa fa-heart"></span>Invitar amigos</h1>
+	<div class="btn-regresar pull-right inline valing-baseline"><a href="miPerfil.html"><span class="fa fa-arrow-circle-o-left"></span></a></div>
+</div> 
+
+<div class="row col-md-12 menu-general bg-gris-claro text-center padding-1em" id="main">
+<ul class="text-left padding-0">
+	<a href="https://www.facebook.com/Wingstop/"><li><span class="fa fa-facebook-square"></span> Facebook <span class="fa fa-chevron-right pull-right"></span></li></a>
+	<a href="https://twitter.com/wingstop"><li><span class="fa fa-twitter-square"></span> Twitter <span class="fa fa-chevron-right pull-right"></span></li></a>
+	<a href="https://www.instagram.com/wingstop/"><li><span class="fa fa-instagram"></span> Instagram <span class="fa fa-chevron-right pull-right"></span></li></a>
+</ul></div>
+
+<div class="nav-inf bg-negro text-blanco">
+	<div class="btn-regresar pull-left inline valing-baseline mn2"><a href="#"><!--<span class="fa  fa-shopping-cart"></span></a>--></div>
+
+	<div class="btn-regresar pull-right inline valing-baseline mn"><a href="#"><span class="fa fa-bars"></span></a></div>
+
+</div> 
+ <div id="menus"></div>
+ 
+<!--JS-->
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.min.js"></script>
+<script src="js/prefixfree.min.js"></script>
+<script src="js/localstorage.js"></script>
+<script src="js/menu.js"></script>
+<script src="js/menu_generico.js"></script>
+<script src="js/facebook.js"></script>
+<script src="js/comun.js"></script>
+</body>
+</html>

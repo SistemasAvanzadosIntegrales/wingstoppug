@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> </title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <!--CSS-->
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/modal.css" />
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/redmond/jquery-ui.min.css">
+    
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="cordova.js"></script>          <!-- phantom library, needed for Cordova api calls, added during build -->
+    <script src="js/app.js"></script>           <!-- recommended location of your JavaScript code relative to other JS files -->
+    <script src="xdk/init-dev.js"></script>     <!-- normalizes device and document ready events, see README for details -->
+     
+
+</head>
+<body>
+    <div class="col-md-12 nav-sup text-center bg-gris text-blanco">
+        <div class="logo pull-left valing-baseline inline"><img src="img/imgLogo.png"></div>
+        <h1 class="titulo text-center inline valing-baseline text-blanco"><span style='margin-left:30px;'><!--<span class="fa fa-user"></span>-->Registro</span></h1>
+        <div class="btn-regresar pull-right inline valing-baseline"><a href="index.html"><span class="fa fa-arrow-circle-o-left"></span></a></div>
+    </div>  
+
+    <div id="fade4" class="overlay" onclick = "document.getElementById('light4').style.display='none';document.getElementById('fade4').style.display='none'"></div>
+<!-- fin base semi-transparente -->
+<!-- Ventana modal -->
+    <div id="light4" class="modal2" style="text-align:center;">
+        <div id="cerrarModal" onclick="cerrar_modal();">
+            <i class="fa fa-times fa-3x"></i>
+        </div>
+        <div style="text-align:center; color:rgb(1,105,54);">
+            <img src="img/logo_wingstop_verde.png" width="80%"><br><br>
+            <span style="font-weight:bold; font-size:1.5em;">¡Muchas gracias por registrarte!</span><br><br>
+            <span>Consulta en tu correo<br>el código de activación de tu cuenta<br>para completar tu registro.</span><br><br>
+        </div>
+        <a>
+            <button type="" onclick="window.location='usuarioLealtad.html';" class="btn-gris text-left"><!--cerrar();-->
+                <span class="fa fa-check-circle"> </span> Aceptar
+            </button>
+        </a>
+    </div>
+
+    <div class="row col-md-12 container" id="main">
+        <div>
+            <form  class="form-group" name="frmRegistro" id="frmRegistro">
+                <center>
+                    <label style="color:rgb(1,105,54)"><br>Para tramitar tu cuenta de Lealtad<br><!--<img style="max-width:250px" src="img/logo_blanco.png" /> <br><br>-->Es necesario que registres<br>la siguiente información.<br><br></label>
+                </center>
+                <label>Nombre:</label>
+                <input type="text" class="form-control" id="nombre"  name="nombre"><!-- placeholder="Nombre" -->
+                <label>Sexo:</label>
+                <select class="form-control" id="sexo" name="sexo">
+                    <option value="">Selecciona</option>
+                    <option value="F">Femenino</option>
+                    <option value="M">Masculino</option>
+                </select>
+                <label>E-mail:</label>
+                <input type="text" class="form-control" id="email"  name="email" onblur="this.value=this.value.toLowerCase();"><!--placeholder="E-mail"-->
+                <label>Fecha de nacimiento:</label>
+                <input id="fec_nac" class="form-control input-sm date required" type="date" placeholder="Fecha nacimiento">
+
+                
+                <!--<input type="text" class="form-control" id="telefono"  name="telefono" placeholder="Teléfono">-->
+                
+                <!--<input type="text" class="form-control" id="fecha_nac"  name="fecha_nac" placeholder="Fecha de nacimiento">-->
+    
+                <p class="alert alert-danger" id="alertaRegistro" style="display:none !important;"></p>
+                <button onclick="pre_registro();" type="button" class="btn-gris text-right" style="float:right"><span class="fa fa-mail-forward"> </span> Enviar</button>
+             <!--    <button onclick="cqr();" type="button" class="btn-gris text-right"><span class="fa fa-mail-forward"> </span> Codigo QR</button>-->
+                <div id="gen_qr">
+                
+                </div>
+                <div id="menus">
+                    <img class="hidden" id="usr" >
+                </div>
+                
+            </form>
+            <div id="error"></div>
+          </div>
+    <!--JS-->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/prefixfree.min.js"></script>
+    <script src="js/localstorage.js"></script>
+    <script src="js/comun.js"></script>
+    <script src="js/registro.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+     <script type="text/javascript">
+        function cerrar(){
+            document.getElementById('light4').style.display='none';
+            document.getElementById('fade4').style.display ='none';
+        }//function
+       $(document).ready(function(){
+          // alert(localStorage.getItem('codigo_qr')+"io" );
+          // if(pughpharm.isLogged())
+            //   window.location = "categoriaProductos.html";
+            
+            var reGe=JSON.parse(localStorage.getItem("registroGenerico"));
+            if(reGe!=null){
+                $("#nombre").val( reGe["nombre"]);
+                $("#sexo").val(   reGe["sexo"]);
+                $("#email").val(  reGe["email"]);
+                $("#fec_nac").val(reGe["fec_nac"]);
+            }//if
+           
+            if(localStorage.getItem('codigo_qr')){
+                window.location = "floatCupon02.html";
+                //$('#gen_qr').append('<button onclick="cqr();" type="button" class="btn-gris text-right"><span class="fa fa-mail-forward"> </span> Codigo QR</button>');
+                 //window.location = "floatCupon01.html";
+            }else{
+               
+            }//if
+       });
+        function cqr(){
+            window.location = "floatCupon02.html";
+        }
+    </script>
+</body>
+</html>
