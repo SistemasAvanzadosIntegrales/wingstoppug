@@ -124,7 +124,7 @@ $(document).ready(function()
                         assetSlot=asset.uri;
                     if(assetsProcessed===val.board_instance.assets.length)
                     {
-                        var cad='<div style="margin-top:60px" class="objetivosMision width100 inline"><img width="100%" src="'+assetPrevio+'" class="img-icono"><div id="board_'+val.board_instance.board_instance_id+'" style="background-color:#fff; height:30px; width:100%; position: relative; top:-60px;">';
+                        var cad='<div style="margin-top:60px" class="objetivosMision width100 inline"><img width="50%" src="'+assetPrevio+'" class="img-icono"><div id="board_'+val.board_instance.board_instance_id+'" style="background-color:#fff; height:60px; width:100%; position: relative; top:-60px;">';
                         cad+='</div></div>';
                         $(cad).appendTo("#contenedorBoardInstances");
                         getBagInstance(val.board_instance.board_instance_id,assetSlot,val.board_instance.size);
