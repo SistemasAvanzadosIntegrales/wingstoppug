@@ -33,7 +33,7 @@ function getBagInstance(board,slot,nslots)
     $('#board_'+board).html('');
     for(var iPunch=0; iPunch<nslots; iPunch++)
     {
-        cad+='<img id="slot'+iPunch+'" width="50%" img src="'+slot+'" style="margin: 3px 5px" />';
+        cad+='<img id="slot'+iPunch+'" width="20px" img src="'+slot+'" style="margin: 3px 5px" />';
     }
     $('#board_'+board).html(cad);
 
@@ -73,6 +73,8 @@ $(document).ready(function()
         //Guardamos en el local storage los datos de referencia a PICNIC
         localStorage.setItem('player_id',data.player_id);
         localStorage.setItem('auth_token',data.auth_token);
+        getItemsPlayerInventory();
+        snog_dispatcher.broadcast(Snog.events.GET_BOARDS_LIST, {type : "special", filter : "all"});
         if(enviarVentas)
         {
             $.ajax({
@@ -89,21 +91,15 @@ $(document).ready(function()
                 dataType: "json",
                 success: function(data)
                 {
-                    getItemsPlayerInventory();
-                    snog_dispatcher.broadcast(Snog.events.GET_BOARDS_LIST, {type : "special", filter : "all"});
+                    
                 },error: function (data){
                     //alert("error picnipendientes "+JSON.stringify(data));
                 }
             }); 
             
         }
-        else
-        {
-            getItemsPlayerInventory();
-            snog_dispatcher.broadcast(Snog.events.GET_BOARDS_LIST, {type : "special", filter : "all"});
-        }
-            
         
+            
         
     });
     
