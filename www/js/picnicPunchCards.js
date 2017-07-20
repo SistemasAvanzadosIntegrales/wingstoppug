@@ -238,7 +238,7 @@ $(document).ready(function()
                 swapItem(snog_data.player_inventory.bag_id,val.slot_id, val.item_instance.item_instance_uuid,boards[boardRef].bag_id,boards[val.item_instance.metadata[1].value]['slot'],null);
                 snog_dispatcher.broadcast(Snog.events.GET_BOARDS_INSTANCES, {type:'special', player_id:player });
                 $.ajax({
-                   url:  "index.php",
+                   url:  ruta_generica,
                    type: 'POST',
                    data: 
                    {
