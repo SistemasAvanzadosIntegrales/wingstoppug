@@ -149,7 +149,7 @@ $(document).ready(function()
                         assetSlot=asset.uri;
                     if(assetsProcessed===val.board_instance.assets.length)
                     {
-                        var cad='<div style="margin-top:60px" class="objetivosMision width100 inline"><img width="100%" src="'+assetPrevio+'" class="img-icono"><div id="board_'+val.board_instance.board_instance_id+'" style="background-color:#fff; height:60px; width:100%; position: relative; top:-60px;">';
+                        var cad='<div style="margin-top:30px" class="objetivosMision width100 inline"><img width="100%" src="'+assetPrevio+'" class="img-icono"><div id="board_'+val.board_instance.board_instance_id+'" style="background-color:#fff; height:30px; width:100%; position: relative; top:-30px;">';
                         cad+='</div></div>';
                         $(cad).appendTo("#contenedorBoardInstances");
                         getBagInstance(val.board_instance.board_instance_id,assetSlot,val.board_instance.size);
@@ -198,7 +198,8 @@ $(document).ready(function()
             $("#slot"+val.slot_id).attr('src', val.item_instance.assets[0].uri);
         });
         if(data.bag_items.length==data.size)
-            $('<input type="button" class="btn btn-success" value="Obtener cupón" onclick="obtenerCupon('+data.bag_items[0].item_instance.metadata[0].value+');"/>').appendTo('#contenedorBoardInstances');   
+            alert("Felicidades, has completado una punch card");
+            //$('<input type="button" class="btn btn-success" value="Obtener cupón" onclick="obtenerCupon('+data.bag_items[0].item_instance.metadata[0].value+');"/>').appendTo('#contenedorBoardInstances');   
     });
 
 
@@ -236,6 +237,26 @@ $(document).ready(function()
             {   
                 swapItem(snog_data.player_inventory.bag_id,val.slot_id, val.item_instance.item_instance_uuid,boards[boardRef].bag_id,boards[val.item_instance.metadata[1].value]['slot'],null);
                 snog_dispatcher.broadcast(Snog.events.GET_BOARDS_INSTANCES, {type:'special', player_id:player });
+                $.ajax({
+                   url:  "index.php",
+                   type: 'POST',
+                   data: 
+                   {
+                       funcion      :'perforoPunchCard',
+                       idCliente    :cliente,
+                       numeroTarjeta:localStorage['tarjeta'],
+                       idPromocion  :boards[boardRef].board_ref,
+                       idPunchCard  :boards[boardRef].board_instance_id,
+                       perforaciones:boards[val.item_instance.metadata[1].value]['slot']
+                   },
+                   success: function(re){
+                        alert("Se ha registrado una venta");
+                   },
+                   error: function(re){
+                                   alert("Error al comunicarse con servidor.");
+                   }
+               });
+
             }
         });
     });
