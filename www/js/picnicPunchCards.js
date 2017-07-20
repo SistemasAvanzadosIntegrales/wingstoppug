@@ -33,7 +33,7 @@ function getBagInstance(board,slot,nslots)
     $('#board_'+board).html('');
     for(var iPunch=0; iPunch<nslots; iPunch++)
     {
-        cad+='<img id="slot'+iPunch+'" img src="'+slot+'" style="margin: 3px 5px" />';
+        cad+='<img id="slot'+iPunch+'" width="50%" img src="'+slot+'" style="margin: 3px 5px" />';
     }
     $('#board_'+board).html(cad);
 
@@ -69,13 +69,42 @@ $(document).ready(function()
 
     snog_dispatcher.on(Snog.events.LOGIN_SUCCESS, function (data) 
     {
-        alert(enviarVentas);
         player=data.player_id;
         //Guardamos en el local storage los datos de referencia a PICNIC
         localStorage.setItem('player_id',data.player_id);
         localStorage.setItem('auth_token',data.auth_token);
-        getItemsPlayerInventory();
-        snog_dispatcher.broadcast(Snog.events.GET_BOARDS_LIST, {type : "special", filter : "all"});
+        if(enviarVentas)
+        {
+            $.ajax({
+                method: 'POST',
+                url: ruta_generica,
+                data: {
+                    funcion:'transaccionesPendientesAPicnic',
+                    idCliente:cliente,
+                    numeroTarjeta:localStorage['tarjeta'],
+                    playerId: localStorage.getItem('player_id')
+
+                },
+                processData: true,
+                dataType: "json",
+                success: function(data)
+                {
+                    getItemsPlayerInventory();
+                    snog_dispatcher.broadcast(Snog.events.GET_BOARDS_LIST, {type : "special", filter : "all"});
+                },error: function (data){
+                    //alert("error picnipendientes "+JSON.stringify(data));
+                }
+            }); 
+            
+        }
+        else
+        {
+            getItemsPlayerInventory();
+            snog_dispatcher.broadcast(Snog.events.GET_BOARDS_LIST, {type : "special", filter : "all"});
+        }
+            
+        
+        
     });
     
     snog_dispatcher.on(Snog.events.GET_BOARDS_LIST_SUCCESS, function (data, id) 
@@ -124,7 +153,7 @@ $(document).ready(function()
                         assetSlot=asset.uri;
                     if(assetsProcessed===val.board_instance.assets.length)
                     {
-                        var cad='<div style="margin-top:60px" class="objetivosMision width100 inline"><img width="50%" src="'+assetPrevio+'" class="img-icono"><div id="board_'+val.board_instance.board_instance_id+'" style="background-color:#fff; height:60px; width:100%; position: relative; top:-60px;">';
+                        var cad='<div style="margin-top:60px" class="objetivosMision width100 inline"><img width="100%" src="'+assetPrevio+'" class="img-icono"><div id="board_'+val.board_instance.board_instance_id+'" style="background-color:#fff; height:60px; width:100%; position: relative; top:-60px;">';
                         cad+='</div></div>';
                         $(cad).appendTo("#contenedorBoardInstances");
                         getBagInstance(val.board_instance.board_instance_id,assetSlot,val.board_instance.size);
