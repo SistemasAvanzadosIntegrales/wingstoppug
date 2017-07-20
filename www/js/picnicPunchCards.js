@@ -1,5 +1,8 @@
+var enviarVentas=false;
 function loginRealm()
 {
+    if(arguments.length>=1)
+        enviarVentas=true;
     var registro = JSON.parse(localStorage.getItem('pughpharm'));
     snog_dispatcher.broadcast(Snog.events.REALM_LOGIN, {token: registro.codigo, realm:"easier_loyalty"});
 }
@@ -66,6 +69,7 @@ $(document).ready(function()
 
     snog_dispatcher.on(Snog.events.LOGIN_SUCCESS, function (data) 
     {
+        alert(enviarVentas);
         player=data.player_id;
         //Guardamos en el local storage los datos de referencia a PICNIC
         localStorage.setItem('player_id',data.player_id);
@@ -179,7 +183,6 @@ $(document).ready(function()
         if (data.kind && data.kind==="new_batch" && data.batch_uuid)
         {                   
             batchUid=data.batch_uuid;
-            alert(data.batch_uuid);
             snog_dispatcher.broadcast(Snog.events.GET_ITEM_BATCH, {batch_uuid: data.batch_uuid});
         }
     });
