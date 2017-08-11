@@ -106,6 +106,7 @@ $(document).ready(function()
         snog_dispatcher.broadcast(Snog.events.GET_BOARDS_LIST, {type : "special", filter : "all"});
         if(enviarVentas)
         {
+            alert("enviando");
             
             $.ajax({
                 method: 'POST',
@@ -269,10 +270,9 @@ $(document).ready(function()
         {
             if(val.item_instance!=null)
             {
-                alert("Unlocking:"+boards[boardRef].board_instance_id);
+                alert("Unlocking:");
                 snog_dispatcher.broadcast(Snog.events.UNLOCK_BOARD_INSTANCE, { 	board_instance_id: boards[boardRef].board_instance_id});
-                
-                /*swapItem(snog_data.player_inventory.bag_id,val.slot_id, val.item_instance.item_instance_uuid,boards[boardRef].bag_id,boards[val.item_instance.metadata[1].value]['slot'],null);
+                swapItem(snog_data.player_inventory.bag_id,val.slot_id, val.item_instance.item_instance_uuid,boards[boardRef].bag_id,boards[val.item_instance.metadata[1].value]['slot'],null);
                 snog_dispatcher.broadcast(Snog.events.GET_BOARDS_INSTANCES, {type:'special', player_id:player });
                 $.ajax({
                    url:  ruta_generica,
@@ -292,42 +292,8 @@ $(document).ready(function()
                    error: function(re){
                                    alert("Error al comunicarse con servidor.");
                    }
-               });*/
+               });
 
             }
         });
-    });
-    
-    snog_dispatcher.on(Snog.events.UNLOCK_BOARD_INSTANCE_SUCCESS, function(data){
-        alert("unlocked and swapping");
-        swapItem(snog_data.player_inventory.bag_id,val.slot_id, val.item_instance.item_instance_uuid,boards[boardRef].bag_id,boards[val.item_instance.metadata[1].value]['slot'],null);
-        
-    });
-
-    
-
-    snog_dispatcher.on(Snog.events.ITEM_INSTANCES_SWAPPED, function(data)
-    {
-        alert("swaped");
-        snog_dispatcher.broadcast(Snog.events.GET_BOARDS_INSTANCES, {type:'special', player_id:player });
-        $.ajax({
-           url:  ruta_generica,
-           type: 'POST',
-           data: 
-           {
-               funcion      :'perforoPunchCard',
-               idCliente    :cliente,
-               numeroTarjeta:localStorage['tarjeta'],
-               idPromocion  :boards[boardRef].board_ref,
-               idPunchCard  :boards[boardRef].board_instance_id,
-               perforaciones:boards[val.item_instance.metadata[1].value]['slot']
-           },
-           success: function(re){
-                //alert("Se ha registrado una venta");
-           },
-           error: function(re){
-                           alert("Error al comunicarse con servidor.");
-           }
-        });
-
     });
