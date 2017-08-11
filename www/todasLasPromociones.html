@@ -67,6 +67,32 @@
         </a>
       </ul><br>
         
+        
+    
+        <div id="contenedorBoardInstancesLealtad" style="display:none;">
+            <div style="margin-top:30px" class="objetivosMision width100 inline">
+                <img width="100%" src="img/punchCardBanner.png" class="img-icono">
+                <div id="boardLealtad" style="background-color:#fff; height:30px; width:100%; position: relative; top:-30px;">
+                    <img id="slot1" width="18px" img src="https://05b4d69d89ce37b7ad4f-7be66ae98d72eaf498d9c2c9a6b81409.ssl.cf1.rackcdn.com/4a68a012a2f5a4d3b436d56f2e8f6499-20170302T033006Z.png" style="margin: 3px 5px" />
+                    <img id="slot2" width="18px" img src="https://05b4d69d89ce37b7ad4f-7be66ae98d72eaf498d9c2c9a6b81409.ssl.cf1.rackcdn.com/4a68a012a2f5a4d3b436d56f2e8f6499-20170302T033006Z.png" style="margin: 3px 5px" />
+                    <img id="slot3" width="18px" img src="https://05b4d69d89ce37b7ad4f-7be66ae98d72eaf498d9c2c9a6b81409.ssl.cf1.rackcdn.com/4a68a012a2f5a4d3b436d56f2e8f6499-20170302T033006Z.png" style="margin: 3px 5px" />
+                    <img id="slot4" width="18px" img src="https://05b4d69d89ce37b7ad4f-7be66ae98d72eaf498d9c2c9a6b81409.ssl.cf1.rackcdn.com/4a68a012a2f5a4d3b436d56f2e8f6499-20170302T033006Z.png" style="margin: 3px 5px" />
+                    <img id="slot5" width="18px" img src="https://05b4d69d89ce37b7ad4f-7be66ae98d72eaf498d9c2c9a6b81409.ssl.cf1.rackcdn.com/4a68a012a2f5a4d3b436d56f2e8f6499-20170302T033006Z.png" style="margin: 3px 5px" />
+                    <img id="slot6" width="18px" img src="https://05b4d69d89ce37b7ad4f-7be66ae98d72eaf498d9c2c9a6b81409.ssl.cf1.rackcdn.com/4a68a012a2f5a4d3b436d56f2e8f6499-20170302T033006Z.png" style="margin: 3px 5px" />
+                    <img id="slot7" width="18px" img src="https://05b4d69d89ce37b7ad4f-7be66ae98d72eaf498d9c2c9a6b81409.ssl.cf1.rackcdn.com/4a68a012a2f5a4d3b436d56f2e8f6499-20170302T033006Z.png" style="margin: 3px 5px" />
+                    <img id="slot8" width="18px" img src="https://05b4d69d89ce37b7ad4f-7be66ae98d72eaf498d9c2c9a6b81409.ssl.cf1.rackcdn.com/4a68a012a2f5a4d3b436d56f2e8f6499-20170302T033006Z.png" style="margin: 3px 5px" />
+                    <img id="slot9" width="18px" img src="https://05b4d69d89ce37b7ad4f-7be66ae98d72eaf498d9c2c9a6b81409.ssl.cf1.rackcdn.com/4a68a012a2f5a4d3b436d56f2e8f6499-20170302T033006Z.png" style="margin: 3px 5px" />
+                    <img id="slot10" width="18px" img src="https://05b4d69d89ce37b7ad4f-7be66ae98d72eaf498d9c2c9a6b81409.ssl.cf1.rackcdn.com/4a68a012a2f5a4d3b436d56f2e8f6499-20170302T033006Z.png" style="margin: 3px 5px" />
+                </div>
+            </div>
+        </div>
+
+        <div id="contenedorBoardInstances" style="display:none">
+
+        </div>
+        
+        
+        
         <div class="text-center clear text-center" id="contenedorPromociones" style="overflow:auto;"></div>
         
         <div id="fade" class="overlay" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'"></div>
@@ -157,6 +183,12 @@
   <!--JS--> 
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
   <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script> 
+    <script type="text/javascript" src="js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="js/jquery.browser.js"></script>
+    <script type="text/javascript" src="js/snog-2.5.36.js"></script>
+    <script type="text/javascript" src="js/snog-2.5.36-widget.js"></script>
+    <script type="text/javascript" src="js/snog-config.js"></script>
+    <script type="text/javascript" src="js/picnicPunchCards.js"></script>
   <!-- Include all compiled plugins (below), or include individual files as needed --> 
   <script src="js/bootstrap.min.js"></script> 
   <script src="js/prefixfree.min.js"></script>
@@ -351,6 +383,12 @@
             cerrar_modal();
         }
         $(document).ready(function(){
+            //alert("Llego inicio");
+            if(pughpharm.isLogged()){
+                loginRealm(1);
+            }else{
+                window.location = "index.html";
+            }//if
             mostrarCuponesHorizontal();
             if(!(pughpharm.isLogged() || tieneDatosGenericos())){
                 document.getElementById('light4').style.display='block';

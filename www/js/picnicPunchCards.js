@@ -18,7 +18,7 @@ function swapItem(f_bag_id, f_slot_id,f_item_instance_uuid,t_bag_id,t_slot_id,t_
 }
 
 
-
+ 
 function getBoardInstances()
 {
     snog_dispatcher.broadcast(Snog.events.GET_BOARDS_INSTANCES, {type:'special', player_id:parseInt(localStorage.getItem('player_id')) });
@@ -43,6 +43,34 @@ function getBagInstance(board,slot,nslots)
 function getItemsPlayerInventory()
 {
     snog_dispatcher.broadcast(Snog.events.GET_PLAYER_INVENTORY);
+}
+
+function obtenerPerforacionesLealtad()
+{
+    
+    $.ajax({
+        method: 'POST',
+        url: ruta_generica,
+        data: {
+            funcion:'damePerforaciones',
+            idCliente:cliente,
+            numeroTarjeta:localStorage['tarjeta']
+        },
+        processData: true,
+        dataType: "json",
+        success: function(data)
+        {
+            
+            for(var i=1;i<=parseInt(data.mensaje);i++)
+            {
+                //alert("Slot "+i);
+                $("#slot"+i).attr('src', 'https://a5f8e58372715ad8da92-946fca8d31c7ab353cb4968b59b10204.ssl.cf1.rackcdn.com/2262536f08131599f960793987440ae4-20170228T180318Z.png');
+            }
+        },error: function (data){
+            alert("error "+JSON.stringify(data));
+        }
+    }); 
+    
 }
 
 var boards={};
@@ -73,10 +101,12 @@ $(document).ready(function()
         //Guardamos en el local storage los datos de referencia a PICNIC
         localStorage.setItem('player_id',data.player_id);
         localStorage.setItem('auth_token',data.auth_token);
+        
         getItemsPlayerInventory();
         snog_dispatcher.broadcast(Snog.events.GET_BOARDS_LIST, {type : "special", filter : "all"});
         if(enviarVentas)
         {
+            
             $.ajax({
                 method: 'POST',
                 url: ruta_generica,
@@ -91,7 +121,7 @@ $(document).ready(function()
                 dataType: "json",
                 success: function(data)
                 {
-                    
+                    obtenerPerforacionesLealtad();
                 },error: function (data){
                     //alert("error picnipendientes "+JSON.stringify(data));
                 }
@@ -197,9 +227,13 @@ $(document).ready(function()
             boards[val.item_instance.metadata[1].value]['slot']=slotActual;
             $("#slot"+val.slot_id).attr('src', val.item_instance.assets[0].uri);
         });
-        if(data.bag_items.length==data.size)
-            alert("Felicidades, has completado una punch card");
-            //$('<input type="button" class="btn btn-success" value="Obtener cupón" onclick="obtenerCupon('+data.bag_items[0].item_instance.metadata[0].value+');"/>').appendTo('#contenedorBoardInstances');   
+        if(data.bag_items.length>=data.size)
+        {
+            //alert("Felicidades, has completado una punchcard");
+            snog_dispatcher.broadcast(Snog.events.DELETE_BOARD_INSTANCE, { board_instance_id:parseInt(boards[boardRef].board_instance_id) });
+            snog_dispatcher.broadcast(Snog.events.GET_BOARDS_LIST, {type : "special", filter : "all"});
+            
+        }
     });
 
 
@@ -234,8 +268,11 @@ $(document).ready(function()
         jQuery.each(snog_data.player_inventory.slots, function(i, val) 
         {
             if(val.item_instance!=null)
-            {   
-                swapItem(snog_data.player_inventory.bag_id,val.slot_id, val.item_instance.item_instance_uuid,boards[boardRef].bag_id,boards[val.item_instance.metadata[1].value]['slot'],null);
+            {
+                alert("Unlocking:"+boards[boardRef].board_instance_id);
+                snog_dispatcher.broadcast(Snog.events.UNLOCK_BOARD_INSTANCE, { 	board_instance_id: boards[boardRef].board_instance_id});
+                
+                /*swapItem(snog_data.player_inventory.bag_id,val.slot_id, val.item_instance.item_instance_uuid,boards[boardRef].bag_id,boards[val.item_instance.metadata[1].value]['slot'],null);
                 snog_dispatcher.broadcast(Snog.events.GET_BOARDS_INSTANCES, {type:'special', player_id:player });
                 $.ajax({
                    url:  ruta_generica,
@@ -250,24 +287,47 @@ $(document).ready(function()
                        perforaciones:boards[val.item_instance.metadata[1].value]['slot']
                    },
                    success: function(re){
-                        alert("Se ha registrado una venta");
+                        //alert("Se ha registrado una venta");
                    },
                    error: function(re){
                                    alert("Error al comunicarse con servidor.");
                    }
-               });
+               });*/
 
             }
         });
     });
+    
+    snog_dispatcher.on(Snog.events.UNLOCK_BOARD_INSTANCE_SUCCESS, function(data){
+        alert("unlocked and swapping");
+        swapItem(snog_data.player_inventory.bag_id,val.slot_id, val.item_instance.item_instance_uuid,boards[boardRef].bag_id,boards[val.item_instance.metadata[1].value]['slot'],null);
+        
+    });
 
     
 
-    /*snog_dispatcher.on(Snog.events.ITEM_INSTANCES_SWAPPED, function(data){
+    snog_dispatcher.on(Snog.events.ITEM_INSTANCES_SWAPPED, function(data)
+    {
         alert("swaped");
         snog_dispatcher.broadcast(Snog.events.GET_BOARDS_INSTANCES, {type:'special', player_id:player });
-    });*/
+        $.ajax({
+           url:  ruta_generica,
+           type: 'POST',
+           data: 
+           {
+               funcion      :'perforoPunchCard',
+               idCliente    :cliente,
+               numeroTarjeta:localStorage['tarjeta'],
+               idPromocion  :boards[boardRef].board_ref,
+               idPunchCard  :boards[boardRef].board_instance_id,
+               perforaciones:boards[val.item_instance.metadata[1].value]['slot']
+           },
+           success: function(re){
+                //alert("Se ha registrado una venta");
+           },
+           error: function(re){
+                           alert("Error al comunicarse con servidor.");
+           }
+        });
 
-    
-
-});
+    });

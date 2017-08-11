@@ -58,9 +58,9 @@
         <div>
             <form  class="form-group" name="frmRegistro" id="frmRegistro">
                 <center>
-                    <label style="color:rgb(1,105,54)"><br>Para tramitar tu cuenta de Lealtad<br><!--<img style="max-width:250px" src="img/logo_blanco.png" /> <br><br>-->Es necesario que registres<br>la siguiente información.<br><br></label>
+                    <label style="color:rgb(1,105,54)">Para tramitar tu cuenta de Lealtad<br><!--<img style="max-width:250px" src="img/logo_blanco.png" /> <br><br>-->Es necesario que registres<br>la siguiente información.<br><span style='font-size:0.8em;'>(Los datos con asterisco(*), son obligatorios)</span><br></label>
                 </center>
-                <label>Nombre:</label>
+                <label>*Nombre:</label>
                 <input type="text" class="form-control" id="nombre"  name="nombre"><!-- placeholder="Nombre" -->
                 <label>Sexo:</label>
                 <select class="form-control" id="sexo" name="sexo">
@@ -68,7 +68,7 @@
                     <option value="F">Femenino</option>
                     <option value="M">Masculino</option>
                 </select>
-                <label>E-mail:</label>
+                <label>*E-mail:</label>
                 <input type="text" class="form-control" id="email"  name="email" onblur="this.value=this.value.toLowerCase();"><!--placeholder="E-mail"-->
                 <label>Fecha de nacimiento:</label>
                 <input id="fec_nac" class="form-control input-sm date required" type="date" placeholder="Fecha nacimiento">
